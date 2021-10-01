@@ -18,8 +18,6 @@ class Worker extends Model
         'wor_lastname',
         'wor_email',
         'wor_home_address',
-        'wor_date_admission',
-        'wor_date_egrress',
         'wor_type_contract',
         'wor_status',
         'wor_pin',

@@ -3,8 +3,9 @@
 @section('content')
 <div class="row clearfix justify-content-center">
   <div class="col-12">
-    @livewire('worker.index-component')
+    @livewire('worker.create-component')
   </div>
 </div>
 @endsection
+
 

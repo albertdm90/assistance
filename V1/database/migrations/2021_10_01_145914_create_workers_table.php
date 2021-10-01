@@ -21,8 +21,6 @@ class CreateWorkersTable extends Migration
             $table->string('wor_lastname');
             $table->string('wor_email')->unique();
             $table->string('wor_home_address')->nullable();
-            $table->date('wor_date_admission')->nullable();
-            $table->date('wor_date_egrress')->nullable();
             $table->string('wor_type_contract')->nullable();
             $table->integer('wor_status')->default(1);
             $table->integer('wor_pin')->default(123456);

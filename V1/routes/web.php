@@ -36,5 +36,14 @@ Route::prefix('/position')->group(function () {
     })->name('position.edit');
 });
 
+Route::prefix('/worker')->group(function () {
+    Route::view('/', 'worker.index')->name('worker.index');
+    Route::view('/create', 'worker.create')->name('worker.create');
+    Route::get('/edit/{id}', function ($id) {
+        return view('worker.edit',[
+            'wor_id' => $id
+        ]);
+    })->name('worker.edit');
+});
 
-Route::view('/worker', 'worker.index')->name('worker.index');
+
