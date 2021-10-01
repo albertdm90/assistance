@@ -11,6 +11,12 @@
       <li class="{{request()->routeIs('home') ? 'active' : '' }}">
         <a href="{{ route('home') }}" class="nav-link"><i class="fas fa-home"></i><span>Inicio</span></a>
       </li>
+      <li class="{{request()->routeIs('position.index') ? 'active' : '' }}">
+        <a href="{{ route('position.index') }}" class="nav-link"><i class="fas fa-user-tag"></i><span>Cargos</span></a>
+      </li>
+      <li class="{{request()->routeIs('worker.index') ? 'active' : '' }}">
+        <a href="{{ route('worker.index') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Trabajadores</span></a>
+      </li>
     </ul>
   </aside>
 </div>

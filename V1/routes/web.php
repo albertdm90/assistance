@@ -23,4 +23,18 @@ Route::get('/logoutClient', function () {
     Auth::logout();
     return back();
 })->name('logout.index');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('/position')->group(function () {
+    Route::view('/', 'position.index')->name('position.index');
+    Route::view('/create', 'position.create')->name('position.create');
+    Route::get('/edit/{id}', function ($id) {
+        return view('position.edit',[
+            'pos_id' => $id
+        ]);
+    })->name('position.edit');
+});
+
+
+Route::view('/worker', 'worker.index')->name('worker.index');
