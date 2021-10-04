@@ -40,7 +40,7 @@
     @error('wor_home_address') <div class="invalid-feedback">{{ $message }}</div>@enderror
   </div>
 
-  <div class="form-group col-sm-3">
+  <div class="form-group col-sm-6">
     <label>Tipo de contrato</label>
     <select class="form-control{{ $errors->has('wor_type_contract') ? ' is-invalid' : '' }}" wire:model="wor_type_contract" name="wor_type_contract">
       <option>Seleccione</option>
@@ -50,7 +50,7 @@
     @error('wor_type_contract') <div class="invalid-feedback">{{ $message }}</div>@enderror
   </div>
 
-  <div class="form-group col-sm-3">
+  <div class="form-group col-sm-6">
     <label>Cargo</label>
     <select class="form-control{{ $errors->has('pos_id') ? ' is-invalid' : '' }}" wire:model="pos_id" name="pos_id">
       <option>Seleccione</option>
@@ -61,7 +61,7 @@
     @error('pos_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
   </div>
 
-  <div class="form-group col-sm-3">
+  {{-- <div class="form-group col-sm-3">
     <label>Fecha de ingreso</label>
     <input type="date" class="form-control{{ $errors->has('wor_date_admission') ? ' is-invalid' : '' }}" wire:model="wor_date_admission" name="wor_date_admission">
     @error('wor_date_admission') <div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -71,5 +71,5 @@
     <label>Fecha de Egreso</label>
     <input type="date" class="form-control{{ $errors->has('wor_date_egrress') ? ' is-invalid' : '' }}" wire:model="wor_date_egrress" name="wor_date_egrress">
     @error('wor_date_egrress') <div class="invalid-feedback">{{ $message }}</div>@enderror
-  </div>
+  </div> --}}
 </div>

@@ -44,6 +44,11 @@ Route::prefix('/worker')->group(function () {
             'wor_id' => $id
         ]);
     })->name('worker.edit');
+    Route::get('/show/{id}', function ($id) {
+        return view('worker.show',[
+            'wor_id' => $id
+        ]);
+    })->name('worker.show');
 });
 
 

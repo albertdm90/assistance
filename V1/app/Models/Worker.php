@@ -27,6 +27,6 @@ class Worker extends Model
 
     public function position()
     {
-        return $this->hasOne('App\Models\Position');
+        return $this->hasOne(Position::class, 'id');
     }
 }

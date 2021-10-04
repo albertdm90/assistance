@@ -71,7 +71,7 @@ class CreateComponent extends Component
 
         $this->dispatchBrowserEvent(
             'redirect', [
-                'url' => route('position.edit', $worker->id), 
+                'url' => route('worker.show', $worker->id), 
             ]
         );
     }

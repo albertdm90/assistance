@@ -1,7 +1,7 @@
 <form action="" wire:submit.prevent="update">
     <div class="card card-dark">
         <div class="card-header">
-            <h4>Crear trabajador</h4>
+            <h4>Editar trabajador</h4>
             <div class="card-header-action">
             </div>
         </div>

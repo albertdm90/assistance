@@ -87,5 +87,11 @@ class EditComponent extends Component
             ]
         );
 
+        $this->dispatchBrowserEvent(
+            'redirect', [
+                'url' => route('worker.show', $this->worker->id), 
+            ]
+        );
+
     }
 }
