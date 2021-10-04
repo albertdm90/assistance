@@ -17,6 +17,9 @@
       <li class="{{request()->routeIs('worker.index') ? 'active' : '' }}">
         <a href="{{ route('worker.index') }}" class="nav-link"><i class="fas fa-user-circle"></i><span>Trabajadores</span></a>
       </li>
+      <li class="{{request()->routeIs('checkpoint.index') ? 'active' : '' }}">
+        <a href="{{ route('checkpoint.index') }}" class="nav-link"><i class="fas fa-location-arrow"></i><span>Puntos de control</span></a>
+      </li>
     </ul>
   </aside>
 </div>

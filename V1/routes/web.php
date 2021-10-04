@@ -51,4 +51,14 @@ Route::prefix('/worker')->group(function () {
     })->name('worker.show');
 });
 
+Route::prefix('/checkpoint')->group(function () {
+    Route::view('/', 'checkpoint.index')->name('checkpoint.index');
+    Route::view('/create', 'checkpoint.create')->name('checkpoint.create');
+    Route::get('/edit/{id}', function ($id) {
+        return view('checkpoint.edit',[
+            'cp_id' => $id
+        ]);
+    })->name('checkpoint.edit');
+});
+
 
