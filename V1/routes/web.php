@@ -19,46 +19,54 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/logoutClient', function () {
-    Auth::logout();
-    return back();
-})->name('logout.index');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
+    Route::get('/logoutClient', function () {
+        Auth::logout();
+        return back();
+    })->name('logout.index');
+    
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    
+    Route::prefix('/position')->group(function () {
+        Route::view('/', 'position.index')->name('position.index');
+        Route::view('/create', 'position.create')->name('position.create');
+        Route::get('/edit/{id}', function ($id) {
+            return view('position.edit',[
+                'pos_id' => $id
+            ]);
+        })->name('position.edit');
+    });
+    
+    Route::prefix('/worker')->group(function () {
+        Route::view('/', 'worker.index')->name('worker.index');
+        Route::view('/create', 'worker.create')->name('worker.create');
+        Route::get('/edit/{id}', function ($id) {
+            return view('worker.edit',[
+                'wor_id' => $id
+            ]);
+        })->name('worker.edit');
+        Route::get('/show/{id}', function ($id) {
+            return view('worker.show',[
+                'wor_id' => $id
+            ]);
+        })->name('worker.show');
+    });
+    
+    Route::prefix('/checkpoint')->group(function () {
+        Route::view('/', 'checkpoint.index')->name('checkpoint.index');
+        Route::view('/create', 'checkpoint.create')->name('checkpoint.create');
+        Route::get('/edit/{id}', function ($id) {
+            return view('checkpoint.edit',[
+                'cp_id' => $id
+            ]);
+        })->name('checkpoint.edit');
+    });
 
-Route::prefix('/position')->group(function () {
-    Route::view('/', 'position.index')->name('position.index');
-    Route::view('/create', 'position.create')->name('position.create');
-    Route::get('/edit/{id}', function ($id) {
-        return view('position.edit',[
-            'pos_id' => $id
-        ]);
-    })->name('position.edit');
+    Route::prefix('/round')->group(function () {
+        Route::view('/', 'round.index')->name('round.index');
+    });
 });
 
-Route::prefix('/worker')->group(function () {
-    Route::view('/', 'worker.index')->name('worker.index');
-    Route::view('/create', 'worker.create')->name('worker.create');
-    Route::get('/edit/{id}', function ($id) {
-        return view('worker.edit',[
-            'wor_id' => $id
-        ]);
-    })->name('worker.edit');
-    Route::get('/show/{id}', function ($id) {
-        return view('worker.show',[
-            'wor_id' => $id
-        ]);
-    })->name('worker.show');
-});
-
-Route::prefix('/checkpoint')->group(function () {
-    Route::view('/', 'checkpoint.index')->name('checkpoint.index');
-    Route::view('/create', 'checkpoint.create')->name('checkpoint.create');
-    Route::get('/edit/{id}', function ($id) {
-        return view('checkpoint.edit',[
-            'cp_id' => $id
-        ]);
-    })->name('checkpoint.edit');
-});
 
 

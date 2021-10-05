@@ -16,4 +16,9 @@ class Checkpoint extends Model
         'cp_lat',
         'cp_long',
     ];
+
+    public function rounds()
+    {
+        return $this->belongsTo(Round::class);
+    }
 }

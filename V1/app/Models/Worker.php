@@ -29,4 +29,9 @@ class Worker extends Model
     {
         return $this->hasOne(Position::class, 'id');
     }
+
+    public function rounds()
+    {
+        return $this->belongsTo(Rounds::class, 'wor_id');
+    }
 }
