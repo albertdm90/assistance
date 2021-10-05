@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class RoundController extends Controller
 {
+    public function checkpointsIndex() 
+    {
+        $checkpoints = Checkpoint::all(['id', 'cp_description']);
+        return response()->json([
+            'ckeckpoints' => $checkpoints
+        ], 200);
+    }
     public function store(Request $request)
     {
         $validate = $request->validate([

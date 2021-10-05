@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::post('/round', 'Api\Auth\RoundController@store');
+Route::get('/round/chekpoints', 'Api\Auth\RoundController@checkpointsIndex');
 
 
 Route::post('/register', 'API\AuthController@register');
