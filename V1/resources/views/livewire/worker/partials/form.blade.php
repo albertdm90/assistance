@@ -60,16 +60,4 @@
     </select>
     @error('pos_id') <div class="invalid-feedback">{{ $message }}</div>@enderror
   </div>
-
-  {{-- <div class="form-group col-sm-3">
-    <label>Fecha de ingreso</label>
-    <input type="date" class="form-control{{ $errors->has('wor_date_admission') ? ' is-invalid' : '' }}" wire:model="wor_date_admission" name="wor_date_admission">
-    @error('wor_date_admission') <div class="invalid-feedback">{{ $message }}</div>@enderror
-  </div>
-
-  <div class="form-group col-sm-3">
-    <label>Fecha de Egreso</label>
-    <input type="date" class="form-control{{ $errors->has('wor_date_egrress') ? ' is-invalid' : '' }}" wire:model="wor_date_egrress" name="wor_date_egrress">
-    @error('wor_date_egrress') <div class="invalid-feedback">{{ $message }}</div>@enderror
-  </div> --}}
 </div>

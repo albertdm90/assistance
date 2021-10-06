@@ -71,20 +71,29 @@
           <div class="padding-20">
             <ul class="nav nav-tabs" id="myTab2" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#about" role="tab" aria-selected="true">Configuración</a>
+                <a class="nav-link active" id="home-tab2" data-toggle="tab" href="#configuration" role="tab" aria-selected="true">Configuración</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#settings" role="tab" aria-selected="false">Rondas</a>
+                <a class="nav-link" id="hours_working" data-toggle="tab" href="#workSchedule" role="tab" aria-selected="false">Horario</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab2" data-toggle="tab" href="#round" role="tab" aria-selected="false">Rondas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('worker.index') }}">Volver</a>
               </li>
             </ul>
             <div class="tab-content tab-bordered" id="myTab3Content">
               
-              <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="home-tab2">
-                {{-- @include('livewire.worker.includes.configuration') --}}
+              <div class="tab-pane fade show active" id="configuration" role="tabpanel" aria-labelledby="home-tab2">
                 @livewire('worker.update-pin-component', ['wor_id'=> $worker->id])
               </div>
+
+              <div class="tab-pane fade" id="workSchedule" role="tabpanel" aria-labelledby="home-tab2">
+                @livewire('worker.work-schedule-component', ['wor_id'=> $worker->id])
+              </div>
   
-              <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="profile-tab2">
+              <div class="tab-pane fade" id="round" role="tabpanel" aria-labelledby="profile-tab2">
                 <form method="post" class="needs-validation">
                   <ul class="list-unstyled list-unstyled-border">
                       <li class="media">
