@@ -18,7 +18,7 @@
           <thead>
             <tr class="primary">
               <th scope="col">#</th>
-              <th scope="col">Nombre</th>
+              <th scope="col">Empleado</th>
               <th scope="col">Fecha de creación</th>
               <th scope="col">Acciones</th>
             </tr>
@@ -28,7 +28,7 @@
             @forelse ($workers as $key => $worker)
               <tr>
                 <th scope="row">{{ $key + 1 }}</th>
-                <td>{{ $worker->wor_name }}  {{ $worker->wor_lastname }}</td>
+                <td><a href="{{ route('worker.show', $worker->id) }}">{{ $worker->wor_id_number.' - '.$worker->wor_name .' '. $worker->wor_lastname }}</a></td>
                 <td>{{ $worker->date }}</td>
                 <td width="100px">
                   <a class="btn btn-icon btn-primary btn-action mr-1" href="{{ route('worker.edit', $worker->id) }}"><i class="fas fa-pencil-alt"></i></a>

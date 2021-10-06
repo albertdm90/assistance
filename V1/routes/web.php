@@ -46,11 +46,7 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
                 'wor_id' => $id
             ]);
         })->name('worker.edit');
-        Route::get('/show/{id}', function ($id) {
-            return view('worker.show',[
-                'wor_id' => $id
-            ]);
-        })->name('worker.show');
+        Route::get('/show/{worker}', 'WorkerController@show')->name('worker.show');
     });
     
     Route::prefix('/checkpoint')->group(function () {
