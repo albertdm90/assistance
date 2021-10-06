@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registrar visita</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<form action="">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-align-self-center" class="text-center">
+        <img class="img" src="https://www.abraxascs.com/web/wp-content/uploads/2019/05/vigilancia_tauro_seguridad.png" alt="">
+      </ion-col>
+      
+      <ion-col size="12" class="m-t-5">
+        <ion-item>
+          <ion-label position="floating">Número de identificación</ion-label>
+          <ion-input required></ion-input>
+        </ion-item>
+        <!-- <ion-input  placeholder="Ingrese su número de identificación" class="text-center"></ion-input> -->
+      </ion-col>
+      <ion-col size="12" class="m-t-5">
+        <ion-item>
+          <ion-label position="floating">PIN</ion-label>
+          <ion-input type="password" pattern="[0-9]*"></ion-input>
+        </ion-item>
+        <!-- <ion-input type="password" class="text-center" placeholder="Ingrese su pin"></ion-input> -->
+      </ion-col>
+      
+    </ion-row>
+    <ion-row class="footer">
+      <ion-col size="6">
+        <ion-button expand="full" type="reset" color="light" required>Limpiar</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" type="submit" color="primary">Enviar</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</form>
+
+
+</ion-content>

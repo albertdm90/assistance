@@ -3,13 +3,21 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'checkpoints',
+    loadChildren: () => import('./checkpoints/checkpoints.module').then( m => m.CheckpointsPageModule)
+  },
+  {
+    path: 'round-create',
+    loadChildren: () => import('./round-create/round-create.module').then( m => m.RoundCreatePageModule)
   },
 ];
 
