@@ -16,8 +16,8 @@ class WorkScheduleComponent extends Component
     protected $rules = [
         'cp_id' => 'required',
         'ws_day' => 'required',
-        'ws_start_time' => 'required|date_format:H:i',
-        'ws_end_time' => 'nullable|after_or_equal:ws_start_time|date_format:H:i',
+        'ws_start_time' => 'required',
+        'ws_end_time' => 'nullable',
     ];
     protected $messages = [
         'required' => 'Requerido',
@@ -90,38 +90,44 @@ class WorkScheduleComponent extends Component
     {
         $this->validate();
 
+        $this->ws_start_time = date('H:i:s', strtotime($this->ws_start_time));
+        $this->ws_end_time = date('H:i:s', strtotime($this->ws_end_time));
+
         $workSchedule = WorkSchedule::where('wor_id', $this->wor_id)
             ->where('cp_id', $this->cp_id)
             ->where('ws_day', $this->ws_day)
-            ->whereTime('ws_start_time', '>=', $this->ws_start_time)
-            ->whereTime('ws_end_time', '<=', $this->ws_end_time)
+            ->whereTime('ws_start_time', '<=', $this->ws_start_time)
+            ->whereTime('ws_end_time', '>=', $this->ws_end_time)
             ->count();
             
         if($workSchedule > 0){
             $this->dispatchBrowserEvent(
                 'messageToastr', [
-                    'type' => 'danger', 
+                    'type' => 'error', 
                     'message' => 'El día esta y la hora ya esta asignada al empleado.'
                 ]
             );
+        }else{
+            WorkSchedule::create([
+                'wor_id' => $this->wor_id,
+                'cp_id' => $this->cp_id,
+                'ws_day' => $this->ws_day,
+                'ws_start_time' => $this->ws_start_time,
+                'ws_end_time' => $this->ws_end_time,
+            ]);
+    
+            $this->dispatchBrowserEvent(
+                'messageToastr', [
+                    'type' => 'success', 
+                    'message' => 'Se ha guardado con éxito.'
+                ]
+            );
+    
+            $this->default();
         }
 
-        WorkSchedule::create([
-            'wor_id' => $this->wor_id,
-            'cp_id' => $this->cp_id,
-            'ws_day' => $this->ws_day,
-            'ws_start_time' => $this->ws_start_time,
-            'ws_end_time' => $this->ws_end_time,
-        ]);
 
-        $this->dispatchBrowserEvent(
-            'messageToastr', [
-                'type' => 'success', 
-                'message' => 'Se ha guardado con éxito.'
-            ]
-        );
-
-        $this->default();
+        
     }
 
     public function edit($id)
@@ -140,20 +146,42 @@ class WorkScheduleComponent extends Component
 
     public function update()
     {
-        $workSchedule = WorkSchedule::find($this->ws_id);
-        $workSchedule->update([
-            'cp_id' => $this->cp_id,
-            'ws_day' => $this->ws_day,
-            'ws_start_time' => $this->ws_start_time,
-            'ws_end_time' => $this->ws_end_time,
-        ]);
-        $this->dispatchBrowserEvent(
-            'messageToastr', [
-                'type' => 'success', 
-                'message' => 'Se ha guardado con éxito.'
-            ]
-        );
-        $this->default();
+        $this->validate();
+
+        $this->ws_start_time = date('H:i:s', strtotime($this->ws_start_time));
+        $this->ws_end_time = date('H:i:s', strtotime($this->ws_end_time));
+
+        $workSchedule = WorkSchedule::where('id', '!=', $this->ws_id)
+            ->where('wor_id', $this->wor_id)
+            ->where('cp_id', $this->cp_id)
+            ->where('ws_day', $this->ws_day)
+            ->whereTime('ws_start_time', '>=', $this->ws_start_time)
+            ->whereTime('ws_end_time', '<=', $this->ws_end_time)
+            ->count();
+
+        if($workSchedule > 0){
+            $this->dispatchBrowserEvent(
+                'messageToastr', [
+                    'type' => 'error', 
+                    'message' => 'El día esta y la hora ya esta asignada al empleado.'
+                ]
+            );
+        }else{
+            $workSchedule = WorkSchedule::find($this->ws_id);
+            $workSchedule->update([
+                'cp_id' => $this->cp_id,
+                'ws_day' => $this->ws_day,
+                'ws_start_time' => $this->ws_start_time,
+                'ws_end_time' => $this->ws_end_time,
+            ]);
+            $this->dispatchBrowserEvent(
+                'messageToastr', [
+                    'type' => 'success', 
+                    'message' => 'Se ha guardado con éxito.'
+                ]
+            );
+            $this->default();
+        }
 
     }
 

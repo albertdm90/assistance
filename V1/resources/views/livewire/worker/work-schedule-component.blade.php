@@ -11,10 +11,10 @@
 		<table class="table table-sm table-hover">
 			<thead>
 				<tr>
-					<th>Punto de control</th>
+					<th width="200">Punto de control</th>
 					<th>Día</th>
 					<th>Hora</th>
-					<th>Accion</th>
+					<th width="120px">Accion</th>
 				</tr>
 			</thead>
 			<tbody>

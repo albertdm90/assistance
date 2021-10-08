@@ -18,7 +18,7 @@
     <div class="col-sm-6">
       <div class="form-group" style="display: flex">
         <label for="inputPassword6">Buscar:</label>
-        <input type="password" id="inputPassword6" class="form-control mx-sm-1" aria-describedby="passwordHelpInline" wire:model="search">
+        <input type="text" id="inputPassword6" class="form-control mx-sm-1" aria-describedby="passwordHelpInline" wire:model="search">
       </div>
     </div>
     

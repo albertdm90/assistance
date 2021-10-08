@@ -26,15 +26,14 @@
           </thead>
           <tbody>
 
-            @forelse ($rounds as $key => $position)
+            @forelse ($rounds as $key => $round)
               <tr>
                 <th scope="row">{{ $key + 1 }}</th>
-                <td>{{ $position->worker }}</td>
-                <td>{{ $position->checkpoint }}</td>
-                <td>{{ $position->date }}</td>
+                <td>{{ $round->worker }}</td>
+                <td>{{ $round->checkpoint }}</td>
+                <td>{{ $round->date }}</td>
                 <td width="100px">
-                  <a class="btn btn-icon btn-primary btn-action mr-1" href="{{ route('position.edit', $position->id) }}"><i class="fas fa-pencil-alt"></i></a>
-                  <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $position->id }}, 'position.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
+                  <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>
             @empty

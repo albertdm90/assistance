@@ -9,7 +9,7 @@
         <div class="card author-box">
           <div class="card-body">
             <div class="author-box-center">
-              <img alt="image" src="assets/img/users/user-1.png" class="rounded-circle author-box-picture">
+              <img alt="image" src="{{ asset('images/security.png')}}" class="rounded-circle author-box-picture">
               <div class="clearfix"></div>
               <div class="author-box-name">
                 <a href="#">{{ $worker->wor_name.' '.$worker->wor_lastname }}</a>
