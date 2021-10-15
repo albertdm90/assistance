@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Empleado</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-row>
+  <ion-col size="12" class="ion-align-self-center" class="text-center">
+    <img class="img" src="https://image.flaticon.com/icons/png/512/98/98745.png" alt="">
+  </ion-col>
+  
+  <ion-col size="12" class="m-t-5">
+    <ion-item>
+      <ion-label position="floating">Número de identificación</ion-label>
+      <ion-input [(ngModel)]="wor_id_number" name="wor_id_number" required></ion-input>
+    </ion-item>
+  </ion-col>
+
+  
+</ion-row>
+
+<ion-row class="footer">
+  <ion-col size="12">
+    <ion-button expand="full" type="button" color="primary" ion-button (click)="submitForm()">Escaner</ion-button>
+  </ion-col>
+</ion-row>
+</ion-content>

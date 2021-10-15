@@ -23,7 +23,7 @@ export class RoundService {
 
   indexCheckPoints()
   {
-    return this.httpClient.get(`${this.url}/chekpoints`).pipe(map((res:any) => {
+    return this.httpClient.get(`${endpoint}/chekpoints`).pipe(map((res:any) => {
       return res.checkpoints;
     }));
   }

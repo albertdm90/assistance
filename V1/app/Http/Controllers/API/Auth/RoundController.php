@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 
 class RoundController extends Controller
 {
-    public function checkpointsIndex() 
+    public function index() 
     {
         $checkpoints = Checkpoint::all(['id', 'cp_description']);
         return response()->json([

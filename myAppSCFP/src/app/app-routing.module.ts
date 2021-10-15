@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'round-create/:id',
     loadChildren: () => import('./round-create/round-create.module').then( m => m.RoundCreatePageModule)
   },
+  {
+    path: 'workers',
+    loadChildren: () => import('./workers/workers.module').then( m => m.WorkersPageModule)
+  },
 ];
 
 @NgModule({

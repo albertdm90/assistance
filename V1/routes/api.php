@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/workers', 'Api\Auth\WorkerController@index');
+Route::get('/chekpoints', 'Api\Auth\RoundController@index');
 Route::post('/round', 'Api\Auth\RoundController@store');
-Route::get('/round/chekpoints', 'Api\Auth\RoundController@checkpointsIndex');
 
 
 Route::post('/register', 'API\AuthController@register');
