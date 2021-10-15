@@ -14,7 +14,7 @@ class RoundController extends Controller
     {
         $checkpoints = Checkpoint::all(['id', 'cp_description']);
         return response()->json([
-            'ckeckpoints' => $checkpoints
+            'checkpoints' => $checkpoints
         ], 200);
     }
     public function store(Request $request)

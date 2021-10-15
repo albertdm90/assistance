@@ -7,23 +7,10 @@
 <ion-content>
 
   <ion-list>
-    <ion-item>
-      <ion-label>Punto 1</ion-label>
-      <ion-button routerLink="/round-create" slot="end">IR</ion-button>
+    <ion-item *ngFor="let checkpoint of checkpoints">
+      <ion-label>{{ checkpoint.cp_description }}</ion-label>
+      <ion-button [routerLink]="['/round-create', checkpoint.id]" slot="end">IR</ion-button>
     </ion-item>
-    <ion-item>
-      <ion-label>Punto 2</ion-label>
-      <ion-button routerLink="/round-create" slot="end">IR</ion-button>
-    </ion-item>
-    <ion-item>
-      <ion-label>Punto 3</ion-label>
-      <ion-button routerLink="/round-create" slot="end">IR</ion-button>
-    </ion-item>
-
   </ion-list>
-
   
-
-  
-
 </ion-content>

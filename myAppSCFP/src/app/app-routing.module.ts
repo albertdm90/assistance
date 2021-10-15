@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./checkpoints/checkpoints.module').then( m => m.CheckpointsPageModule)
   },
   {
-    path: 'round-create',
+    path: 'round-create/:id',
     loadChildren: () => import('./round-create/round-create.module').then( m => m.RoundCreatePageModule)
   },
 ];

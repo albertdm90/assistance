@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { RoundService } from '../services/round.service';
 
 @Component({
   selector: 'app-checkpoints',
@@ -8,13 +8,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CheckpointsPage implements OnInit {
 
+  checkpoints:any = [];
   constructor(
-    public httpClient: HttpClient
+    // public httpClient: HttpClient
+    private roundService: RoundService
   ) {
     
    }
 
   ngOnInit() {
+    this.roundService.indexCheckPoints().subscribe(res =>  {
+      this.checkpoints = res;
+    });
   }
-
 }
