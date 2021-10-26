@@ -2,7 +2,20 @@
     <div class="card-header">
         <h4>Trabajadores</h4>
         <div class="card-header-action">
-          <a href="{{ route('worker.create') }}" class="btn btn-primary btn-icon icon-right">Crear <i class="fas fa-chevron-right"></i></a>
+
+          <div class="dropdown ">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Opciones
+            </button>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <a class="dropdown-item has-icon" href="{{ route('worker.create') }}"><i class="fas fa-plus"></i> Crear</a>
+              @if ($status == 1)
+                <a class="dropdown-item has-icon text-success" href="javascript:void(0)" wire:click="update(2)"><i class="fas fa-fingerprint"></i> Actualizar</a>
+              @else
+                <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="update(1)"><i class="fas fa-fingerprint"></i> Cancelar</a>
+              @endif
+            </div>
+          </div>
         </div>
     </div>
     @if (isset($search) && isset($row))
@@ -18,7 +31,9 @@
           <thead>
             <tr class="primary">
               <th scope="col">#</th>
+              <th scope="col">Identificación</th>
               <th scope="col">Empleado</th>
+              <th scope="col" class="text-center">Estatus de la huella</th>
               <th scope="col">Fecha de creación</th>
               <th scope="col">Acciones</th>
             </tr>
@@ -28,7 +43,27 @@
             @forelse ($workers as $key => $worker)
               <tr>
                 <th scope="row">{{ $key + 1 }}</th>
-                <td><a href="{{ route('worker.show', $worker->id) }}">{{ $worker->wor_id_number.' - '.$worker->wor_name .' '. $worker->wor_lastname }}</a></td>
+                <td>
+                  <a href="{{ route('worker.show', $worker->id) }}">{{ $worker->wor_id_number }}</a>
+                </td>
+                <td>
+                  {{ $worker->wor_name .' '. $worker->wor_lastname }}
+                </td>
+                <td class="text-center">
+                  @switch($worker->wor_status)
+                      @case(1)
+                        <span class="badge badge-success">Registrado</span>
+                      @break
+                      @case(2)
+                        <span class="badge badge-primary">En espera</span>
+                      @break
+                      @case(0)
+                        <span class="badge badge-danger">Sin registro</span>
+                      @break
+                      @default
+                          
+                  @endswitch
+                </td>
                 <td>{{ $worker->date }}</td>
                 <td width="100px">
                   <a class="btn btn-icon btn-primary btn-action mr-1" href="{{ route('worker.edit', $worker->id) }}"><i class="fas fa-pencil-alt"></i></a>

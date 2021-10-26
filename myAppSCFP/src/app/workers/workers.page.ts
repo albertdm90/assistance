@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { WorkerService } from './../services/worker.service';
+import { TouchID } from '@ionic-native/touch-id/ngx';
 
 @Component({
   selector: 'app-workers',
@@ -12,7 +13,8 @@ export class WorkersPage implements OnInit {
   wor_id_number:any = ''
 
   constructor(
-    private workerService: WorkerService
+    private workerService: WorkerService,
+    private touchId: TouchID
   ) { }
 
   ngOnInit() {
@@ -22,6 +24,7 @@ export class WorkersPage implements OnInit {
   {
     alert('guardado')
   }
+
 
   
 

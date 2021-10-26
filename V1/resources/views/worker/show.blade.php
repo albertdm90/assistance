@@ -86,7 +86,16 @@
             <div class="tab-content tab-bordered" id="myTab3Content">
               
               <div class="tab-pane fade show active" id="configuration" role="tabpanel" aria-labelledby="home-tab2">
-                @livewire('worker.update-pin-component', ['wor_id'=> $worker->id])
+                <div class="row">
+                  <div class="col-12  mt-3">
+                    <h6>Código PIN</h6>
+                    @livewire('worker.update-pin-component', ['wor_id'=> $worker->id])
+                  </div>
+                  <div class="col-12  mt-5">
+                    <h6>Escaneo de huella dactilar</h6>
+                    @livewire('worker.update-fingerprint', ['wor_id'=> $worker->id])
+                  </div>
+                </div>
               </div>
 
               <div class="tab-pane fade" id="workSchedule" role="tabpanel" aria-labelledby="home-tab2">

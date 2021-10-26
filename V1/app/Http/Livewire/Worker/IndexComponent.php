@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Worker;
 
 use App\Models\Worker;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -28,17 +29,24 @@ class IndexComponent extends Component
     public function render()
     {
         $workers = Worker::where('wor_name', 'LIKE', "%{$this->search}%")
-        ->orWhere('wor_lastname', 'LIKE', "%{$this->search}%")
-        ->orWhere('wor_id_number', 'LIKE', "%{$this->search}%")
-        ->orderBy('id', 'ASC')
-        ->paginate($this->row);
+            ->orWhere('wor_lastname', 'LIKE', "%{$this->search}%")
+            ->orWhere('wor_id_number', 'LIKE', "%{$this->search}%")
+            ->orderBy('id', 'ASC')
+            ->paginate($this->row);
+        $status = 1;
 
-        $workers->map(function($position){
-            $position->date = date('d/m/Y', strtotime($position->created_at));
+        $workers->map(function($worker){
+            $worker->date = date('d/m/Y', strtotime($worker->created_at));
+            
         });
 
+        foreach ($workers as $worker) {
+            $status = $worker->wor_status == 1 ? 1 : 2;
+        }
+
         return view('livewire.worker.index-component', [
-            'workers' => $workers
+            'workers' => $workers,
+            'status' => $status
         ]);
     }
 
@@ -51,5 +59,11 @@ class IndexComponent extends Component
         $this->dispatchBrowserEvent(
             'alert', ['type' => 'success', 'message' => 'se ha eliminado el registro.']
         );
+    }
+
+    public function update($wor_status)
+    {
+        DB::table('workers')->update(['wor_status' => $wor_status]);
+
     }
 }

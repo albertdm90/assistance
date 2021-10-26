@@ -22,7 +22,7 @@ class CreateWorkersTable extends Migration
             $table->string('wor_email')->unique();
             $table->string('wor_home_address')->nullable();
             $table->string('wor_type_contract')->nullable();
-            $table->integer('wor_status')->default(1);
+            $table->integer('wor_status')->default(0);
             $table->integer('wor_pin')->default(123456);
             $table->string('wor_location')->nullable();
             $table->unsignedBigInteger('pos_id');

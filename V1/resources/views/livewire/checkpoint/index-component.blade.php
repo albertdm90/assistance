@@ -19,6 +19,7 @@
             <tr class="primary">
               <th scope="col">#</th>
               <th scope="col">Descripcion</th>
+              <th scope="col" class="text-center">Estatus</th>
               <th scope="col">Fecha de creación</th>
               <th scope="col">Acciones</th>
             </tr>
@@ -30,6 +31,9 @@
                 <th scope="row">{{ $key + 1 }}</th>
                 <td> 
                   {{ $checkpoint->cp_description }}
+                  
+                </td>
+                <td class="text-center">
                   {!! $checkpoint->cp_status ? '<span class="badge badge-success">Activo</span>' : '<span class="badge badge-danger">Inactivo</span>' !!}
                 </td>
                 <td>{{ $checkpoint->date }}</td>
