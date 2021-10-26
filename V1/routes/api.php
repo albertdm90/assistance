@@ -18,6 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/workers', 'Api\Auth\WorkerController@index');
+Route::post('/worker', 'Api\Auth\WorkerController@update');
 Route::get('/chekpoints', 'Api\Auth\RoundController@index');
 Route::post('/round', 'Api\Auth\RoundController@store');
 

@@ -8,7 +8,10 @@ import { endpoint } from 'src/endpoint';
 })
 export class WorkerService {
   
-  url:any = `${endpoint}/workers`;
+  url:any = `${endpoint}/worker`;
+  httpOptions: any = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(
     private httpClient: HttpClient
@@ -19,5 +22,13 @@ export class WorkerService {
     return this.httpClient.get(`${this.url}`).pipe(map((res:any) => {
       return res.workers;
     }));
+  }
+
+  updateFingerprint(data)
+  {
+    return this.httpClient.post(`${this.url}`, data, this.httpOptions)
+      .pipe(map( (res:any) => {
+        return res;
+      }));
   }
 }

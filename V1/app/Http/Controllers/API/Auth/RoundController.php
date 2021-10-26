@@ -30,8 +30,8 @@ class RoundController extends Controller
 
         if(!isset($worker->id) || $checkpoint == 0)    
             return response()->json([
-                'message' => 'Error, no hubo coincidencias'
-            ], 404);
+                'message' => 'Error'
+            ], 200);
 
         $round = Round::create([
             'wor_id' => $worker->id,

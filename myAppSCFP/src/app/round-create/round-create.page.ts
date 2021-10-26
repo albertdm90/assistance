@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { RoundService } from '../services/round.service';
-import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,7 +17,9 @@ export class RoundCreatePage implements OnInit {
   
   constructor(
     private activatedRoute: ActivatedRoute,
-    private roundService: RoundService
+    private router: Router,
+    public toastController: ToastController,
+    private roundService: RoundService,
   ) {  }
 
   
@@ -32,9 +35,25 @@ export class RoundCreatePage implements OnInit {
     }
 
     this.roundService.storeRound(data).subscribe(res =>  {
-      console.log(res);
+      if(res.message === 'Success'){
+        this.presentToast('success', 'Registro exitoso');
+        this.wor_id_number = '';
+        this.wor_pin = '';
+        this.router.navigate(['/']);
+      }else{
+        this.presentToast('danger', 'Error en el PIN o el horario no concuerda');
+      }
     });
+  }
 
+  async presentToast(color, message) {
+    const toast = await this.toastController.create({
+      message,
+      position: 'top',
+      color,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

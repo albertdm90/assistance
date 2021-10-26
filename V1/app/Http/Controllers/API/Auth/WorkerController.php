@@ -15,4 +15,25 @@ class WorkerController extends Controller
             'workers' => $workers
         ], 200);
     }
+
+    public function update(Request $request)
+    {
+        $validate = $request->validate([
+            'wor_id_number' => 'required',
+        ]);
+        $worker = Worker::where('wor_id_number', $request->wor_id_number)->where('wor_status', 2)->first();
+        if(isset($worker->id))
+        {
+            $worker->update([
+                'wor_status' => 1
+            ]);
+            return response()->json([
+                'message' => 'Success'
+            ], 200);
+        }else{
+            return response()->json([
+                'message' => 'Error'
+            ], 200);
+        }
+    }
 }
