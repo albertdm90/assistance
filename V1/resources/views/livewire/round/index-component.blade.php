@@ -20,7 +20,8 @@
               <th scope="col">#</th>
               <th scope="col">Trabajador</th>
               <th scope="col">Lugar</th>
-              <th scope="col">Fecha y hora</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Hora</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
@@ -31,7 +32,8 @@
                 <th scope="row">{{ $key + 1 }}</th>
                 <td>{{ $round->worker }}</td>
                 <td>{{ $round->checkpoint }}</td>
-                <td>{{ $round->date }}</td>
+                <td width="100px">{{ $round->date }}</td>
+                <td width="100px">{{ $round->hour }}</td>
                 <td width="100px">
                   <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
                 </td>

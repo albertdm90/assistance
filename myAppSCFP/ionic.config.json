@@ -1,5 +1,7 @@
 {
   "name": "myAppSCFP",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

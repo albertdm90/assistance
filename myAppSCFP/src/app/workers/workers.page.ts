@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
+import { FingerprintAIO } from '@ionic-native/fingerprint-aio/ngx';
 import { WorkerService } from './../services/worker.service';
 
 @Component({
@@ -13,6 +14,7 @@ export class WorkersPage implements OnInit {
   wor_id_number:any = ''
 
   constructor(
+    private faio: FingerprintAIO,
     public toastController: ToastController,
     private workerService: WorkerService,
   ) { }
@@ -28,6 +30,7 @@ export class WorkersPage implements OnInit {
 
     this.workerService.updateFingerprint(data).subscribe(res =>  {
       if(res.message === 'Success'){
+        this.showFingerprintAuthDlg();
         this.presentToast('success', 'Registro de huella exitoso');
         this.wor_id_number = '';
       }else{
@@ -46,7 +49,32 @@ export class WorkersPage implements OnInit {
     toast.present();
   }
 
+  public showFingerprintAuthDlg() {
 
-  
+    this.faio.isAvailable().then((result: any) => {
+      console.log(result)
+
+      this.faio.show({
+        cancelButtonTitle: 'Cancel',
+        description: "Some biometric description",
+        disableBackup: true,
+        title: 'Scanner Title',
+        fallbackButtonTitle: 'FB Back Button',
+        subtitle: 'This SubTitle'
+      })
+        .then((result: any) => {
+          console.log(result)
+          alert("Successfully Authenticated!")
+        })
+        .catch((error: any) => {
+          console.log(error)
+          alert("Match not found!")
+        });
+
+    })
+      .catch((error: any) => {
+        console.log(error)
+      });
+  }  
 
 }
