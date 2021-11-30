@@ -7,5 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Device extends Model
 {
+    protected $table = 'devices';
+    protected $fillable = [
+        'cod_uuid',
+    ];
+
     use HasFactory;
 }

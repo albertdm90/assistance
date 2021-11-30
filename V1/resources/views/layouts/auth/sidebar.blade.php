@@ -11,6 +11,9 @@
       <li class="{{request()->routeIs('home') ? 'active' : '' }}">
         <a href="{{ route('home') }}" class="nav-link"><i class="fas fa-home"></i><span>Inicio</span></a>
       </li>
+      <li class="{{request()->routeIs('device.index') ? 'active' : '' }}">
+        <a href="{{ route('device.index') }}" class="nav-link"><i class="fas fa-tablet"></i><span>Dispositivos</span></a>
+      </li>
       <li class="{{request()->routeIs([
         'position.index',
         'position.create',

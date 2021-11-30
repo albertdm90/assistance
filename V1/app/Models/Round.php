@@ -9,8 +9,8 @@ class Round extends Model
 {
     use HasFactory;
 
-    public $table = 'rounds';
-    public $fillable = [
+    protected $table = 'rounds';
+    protected $fillable = [
         'wor_id',
         'cp_id',
         'rou_date',
