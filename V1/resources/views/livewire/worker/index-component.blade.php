@@ -10,9 +10,9 @@
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
               <a class="dropdown-item has-icon" href="{{ route('worker.create') }}"><i class="fas fa-plus"></i> Crear</a>
               @if ($status == 1)
-                <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="update(0)"><i class="fas fa-user-alt-slash"></i> Inactivar</a>
+                <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="update(0)"><i class="fas fa-user-alt-slash"></i> Desactivar todos</a>
               @else
-                <a class="dropdown-item has-icon text-success" href="javascript:void(0)" wire:click="update(1)"><i class="fas fa-user"></i> Activar</a>
+                <a class="dropdown-item has-icon text-success" href="javascript:void(0)" wire:click="update(1)"><i class="fas fa-user"></i> Activar todos</a>
               @endif
             </div>
           </div>
@@ -65,8 +65,11 @@
                   @endswitch
                 </td>
                 <td>{{ $worker->date }}</td>
-                <td width="100px">
-                  <a class="btn btn-icon btn-primary btn-action mr-1" href="{{ route('worker.edit', $worker->id) }}"><i class="fas fa-pencil-alt"></i></a>
+                <td width="150px">
+                  <a class="btn btn-icon btn-info btn-action" href="{{ route('worker.show', $worker->id) }}">
+                    <i class="fas fa-eye"></i>
+                  </a>
+                  <a class="btn btn-icon btn-primary btn-action" href="{{ route('worker.edit', $worker->id) }}"><i class="fas fa-pencil-alt"></i></a>
                   <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $worker->id }}, 'worker.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
                 </td>
               </tr>

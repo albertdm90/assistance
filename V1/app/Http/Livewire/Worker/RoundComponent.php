@@ -24,8 +24,8 @@ class RoundComponent extends Component
             ->get();
 
         $rounds->map(function($round){
-            $round->date = date('d-m-Y', strtotime($round->created_at));
-            $round->hour = date('h:i A', strtotime($round->created_at));
+            $round->date = date('d-m-Y', strtotime($round->rou_date));
+            $round->hour = date('h:i A', strtotime($round->rou_time));
             $round->status = '<div class="badge badge-pill badge-warning mb-1 float-right">Nuevo</div>';
             switch ($round->rou_status) {
                 case 0:

@@ -14,30 +14,34 @@
     <div class="card-body">
 
       <div class="table-responsive">
-        <table class="table table-sm">
+        <table class="table table-sm table-bordered table-hover">
           <thead>
             <tr class="primary">
-              <th scope="col">#</th>
+              <th scope="col">Registro</th>
               <th scope="col">Trabajador</th>
               <th scope="col">Lugar</th>
-              <th scope="col">Fecha</th>
-              <th scope="col">Hora</th>
+              <th scope="col" colspan="2">Fecha y hora de la rondas</th>
+              <th scope="col">Estatus</th>
               <th scope="col">Acciones</th>
             </tr>
           </thead>
           <tbody>
 
             @forelse ($rounds as $key => $round)
-              <tr>
-                <th scope="row">{{ $key + 1 }}</th>
-                <td>{{ $round->worker }}</td>
-                <td>{{ $round->checkpoint }}</td>
-                <td width="100px">{{ $round->date }}</td>
-                <td width="100px">{{ $round->hour }}</td>
-                <td width="100px">
-                  <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
-                </td>
-              </tr>
+            <tr>
+              <td class="text-muted">{{ $round->register }}</td>
+              <td>{!! $round->worker !!}</td>
+              <td>{{ $round->checkpoint }}</td>
+              <td width="100px">{{ $round->date }}</td>
+              <td width="100px">{{ $round->hour }}</td>
+              <td width="100px" class="text-center">{!! $round->status !!}</td>
+              <td width="100px">
+                <a class="btn btn-icon btn-info btn-action" href="{{ route('worker.show', $round->wor_id) }}">
+                  <i class="fas fa-eye"></i>
+                </a>
+                <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
+              </td>
+            </tr>
             @empty
               <tr>
                 <td colspan="4" class="text-center text-muted">Sin registro</td>

@@ -23,7 +23,7 @@
         </div>
         <div class="card">
           <div class="card-header">
-            <h4>Personal Details</h4>
+            <h4>Detalles personales</h4>
           </div>
           <div class="card-body">
             <div class="py-4">

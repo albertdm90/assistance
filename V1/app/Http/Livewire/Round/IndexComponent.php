@@ -11,7 +11,7 @@ class IndexComponent extends Component
     use WithPagination;
 
     public $search = '';
-    public $row = 5;
+    public $row = 20;
 
     protected $listeners = ['destroy'];
 
@@ -37,14 +37,33 @@ class IndexComponent extends Component
         ->where('workers.wor_name', 'LIKE', "%{$this->search}%")
         ->orWhere('workers.wor_lastname', 'LIKE', "%{$this->search}%")
         ->orWhere('workers.wor_id_number', 'LIKE', "%{$this->search}%")
-        ->orderBy('rounds.created_at', 'ASC')
+        ->orderBy('rounds.id', 'DESC')
         ->paginate($this->row);
 
         $rounds->map(function($round){
             $round->date = date('d/m/Y', strtotime($round->rou_date));
             $round->hour = date('h:i A', strtotime($round->rou_time));
+            $round->register = date('d/m/Y h:i A', strtotime($round->created_at));
             $round->worker = "$round->wor_id_number - $round->wor_name $round->wor_lastname";
             $round->checkpoint = "$round->cp_description";
+            switch ($round->rou_status) {
+                case 0:
+                    $round->status = '<div class="badge badge-pill badge-warning mb-1 float-right">Nuevo</div>';
+                    break;
+                case 1:
+                    $round->status = '<div class="badge badge-pill badge-primary mb-1 float-right">Visto</div>';
+                    break;
+                case 2:
+                    $round->status = '<div class="badge badge-pill badge-success mb-1 float-right">Verificado</div>';
+                    break;
+                case 3:
+                    $round->status = '<div class="badge badge-pill badge-danger mb-1 float-right">Eliminado</div>';
+                    break;
+                
+                default:
+                    $round->status = '<div class="badge badge-pill badge-warning mb-1 float-right">Nuevo</div>';
+                    break;
+            }
         });
 
         return view('livewire.round.index-component',[

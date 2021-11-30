@@ -2,7 +2,7 @@
   <aside id="sidebar-wrapper">
     <div class="sidebar-brand">
       <a href="#"> <img alt="image" src="{{ asset('assets/img/logo.png') }}" class="header-logo" /> <span
-          class="logo-name">Menu Digital</span>
+          class="logo-name">SCFP</span>
       </a>
     </div>
     <ul class="sidebar-menu">
