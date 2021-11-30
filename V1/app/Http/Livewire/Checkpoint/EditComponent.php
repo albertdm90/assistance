@@ -11,6 +11,7 @@ class EditComponent extends Component
     $cp_status = '',
     $cp_lat = '',
     $cp_long = '',
+    $cp_code = '',
     $cp_id = '';
 
     protected $rules = [
@@ -27,6 +28,8 @@ class EditComponent extends Component
         $this->checkpoint = Checkpoint::find($this->cp_id);
         if(isset($this->checkpoint->id)){
             $this->cp_description = $this->checkpoint->cp_description;
+            $this->cp_status = $this->checkpoint->cp_status;
+            $this->cp_code = $this->checkpoint->cp_code;
         }
     }
 

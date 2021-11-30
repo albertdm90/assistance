@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Worker;
 use App\Models\Worker;
 use Livewire\Component;
 
-class UpdateFingerprint extends Component
+class UpdateStatus extends Component
 {
     public $wor_id = '';
 
@@ -13,14 +13,14 @@ class UpdateFingerprint extends Component
     {
         $worker = Worker::find($this->wor_id);
         $status = $worker->wor_status;
-        return view('livewire.worker.update-fingerprint',[
+        return view('livewire.worker.update-status',[
             'wor_status' => $status
         ]);
     }
 
     public function update($status)
     {
-        $message = $status == 1 ? 'Cancelado.' : 'Se espera confimación de la app móvil.';
+        $message = $status == 1 ? 'Empleado activo.' : 'Empleado actualizado.';
         $worker = Worker::find($this->wor_id);
         $worker->update([
             'wor_status' => $status

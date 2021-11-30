@@ -10,9 +10,9 @@
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
               <a class="dropdown-item has-icon" href="{{ route('worker.create') }}"><i class="fas fa-plus"></i> Crear</a>
               @if ($status == 1)
-                <a class="dropdown-item has-icon text-success" href="javascript:void(0)" wire:click="update(2)"><i class="fas fa-fingerprint"></i> Actualizar</a>
+                <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="update(0)"><i class="fas fa-user-alt-slash"></i> Inactivar</a>
               @else
-                <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="update(1)"><i class="fas fa-fingerprint"></i> Cancelar</a>
+                <a class="dropdown-item has-icon text-success" href="javascript:void(0)" wire:click="update(1)"><i class="fas fa-user"></i> Activar</a>
               @endif
             </div>
           </div>
@@ -52,13 +52,13 @@
                 <td class="text-center">
                   @switch($worker->wor_status)
                       @case(1)
-                        <span class="badge badge-success">Registrado</span>
+                        <span class="badge badge-success">Activo</span>
                       @break
                       @case(2)
-                        <span class="badge badge-primary">En espera</span>
+                        <span class="badge badge-primary">Suspendido</span>
                       @break
                       @case(0)
-                        <span class="badge badge-danger">Sin registro</span>
+                        <span class="badge badge-danger">Inactivo</span>
                       @break
                       @default
                           

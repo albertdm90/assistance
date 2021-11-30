@@ -5,6 +5,13 @@
 </div>
 
 <div class="form-group">
+  <label>Código para etiqueta</label>
+  <input type="text" class="form-control{{ $errors->has('cp_code') ? ' is-invalid' : '' }}" wire:model="cp_code" name="cp_code" {{ isset($cp_id) ? 'readonly' : ''}}>
+  @error('cp_code') <div class="invalid-feedback">{{ $message }}</div>@enderror
+</div>
+
+
+<div class="form-group">
   <label>Estatus</label>
   <select class="form-control{{ $errors->has('cp_status') ? ' is-invalid' : '' }}" wire:model="cp_status" name="cp_status">
     <option value="1">Activo</option>

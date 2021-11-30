@@ -1,7 +1,8 @@
 {
   "name": "myAppSCFP",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular"
 }

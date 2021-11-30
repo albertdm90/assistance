@@ -23,6 +23,7 @@ class CheckpointFactory extends Factory
     {
         return [
             'cp_description' => $this->faker->sentence(),
+            'cp_code' => $this->faker->sentence(),
             'cp_status' => $this->faker->randomElement([false, true]),
             'cp_lat' => $this->faker->randomElement([$this->faker->randomNumber($nbDigits = NULL), null]),
             'cp_long' => $this->faker->randomElement([$this->faker->randomNumber($nbDigits = NULL), null]),

@@ -17,6 +17,8 @@ class CreateRoundsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('wor_id');
             $table->unsignedBigInteger('cp_id');
+            $table->date('rou_date');
+            $table->time('rou_time');
             $table->integer('rou_status')->default(0);
             $table->string('rou_lat')->nullable();
             $table->string('rou_long')->nullable();

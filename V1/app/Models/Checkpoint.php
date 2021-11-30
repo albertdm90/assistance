@@ -12,6 +12,7 @@ class Checkpoint extends Model
     protected $table = 'checkpoints';
     protected $fillable = [
         'cp_description',
+        'cp_code',
         'cp_status',
         'cp_lat',
         'cp_long',

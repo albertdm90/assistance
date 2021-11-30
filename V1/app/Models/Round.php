@@ -13,6 +13,8 @@ class Round extends Model
     public $fillable = [
         'wor_id',
         'cp_id',
+        'rou_date',
+        'rou_time',
         'rou_status',
         'rou_lat',
         'rou_long',

@@ -24,6 +24,8 @@ class RoundFactory extends Factory
         return [
             'wor_id' => $this->faker->numberBetween($min = 1, $max = 20),
             'cp_id' => $this->faker->numberBetween($min = 1, $max = 5),
+            'rou_date' => $this->faker->dateTimeThisMonth()->format('Y-m-d'),
+            'rou_time' => $this->faker->dateTimeThisMonth()->format('H:i:s'),
             'rou_status' => $this->faker->numberBetween($min = 1, $max = 3),
         ];
     }

@@ -10,16 +10,24 @@ class CreateComponent extends Component
     public $cp_description = '',
     $cp_status = 1,
     $cp_lat = '',
-    $cp_long = '';
+    $cp_long = '', 
+    $cp_code = '';
 
     protected $rules = [
         'cp_description' => 'required',
+        'cp_code' => 'required|unique:checkpoints,cp_code',
         'cp_status' => 'required'
     ];
 
     protected $messages = [
-        'required' => 'Requerido'
+        'required' => 'Requerido',
+        'unique' => 'Ya esta registrado',
     ];
+
+    public function mount()
+    {
+        $this->cp_code = md5(date('YmdHmis'));
+    }
 
     public function render()
     {
@@ -32,6 +40,7 @@ class CreateComponent extends Component
 
         $checkpoint = Checkpoint::create([
             'cp_description' => $this->cp_description,
+            'cp_code' => $this->cp_code,
             'cp_status' => $this->cp_status,
         ]);
 

@@ -41,8 +41,8 @@ class IndexComponent extends Component
         ->paginate($this->row);
 
         $rounds->map(function($round){
-            $round->date = date('d/m/Y', strtotime($round->created_at));
-            $round->hour = date('h:i A', strtotime($round->created_at));
+            $round->date = date('d/m/Y', strtotime($round->rou_date));
+            $round->hour = date('h:i A', strtotime($round->rou_time));
             $round->worker = "$round->wor_id_number - $round->wor_name $round->wor_lastname";
             $round->checkpoint = "$round->cp_description";
         });

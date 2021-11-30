@@ -16,6 +16,7 @@ class CreateCheckpointsTable extends Migration
         Schema::create('checkpoints', function (Blueprint $table) {
             $table->id();
             $table->string('cp_description');
+            $table->string('cp_code')->unique();
             $table->boolean('cp_status')->default(true);
             $table->string('cp_lat')->nullable();
             $table->string('cp_long')->nullable();

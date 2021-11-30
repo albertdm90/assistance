@@ -94,8 +94,8 @@
                     @livewire('worker.update-pin-component', ['wor_id'=> $worker->id])
                   </div>
                   <div class="col-12  mt-5">
-                    <h6>Escaneo de huella dactilar</h6>
-                    @livewire('worker.update-fingerprint', ['wor_id'=> $worker->id])
+                    <h6>Estatus del Empleado</h6>
+                    @livewire('worker.update-status', ['wor_id'=> $worker->id])
                   </div>
                 </div>
               </div>
