@@ -1,0 +1,1 @@
+export const endpoint = "http://localhost:8888/assistance/v1/api";

@@ -1,0 +1,21 @@
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Blank</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="container">
+    <strong>SISTEMA DE CONTROL Y FIJACIÓN DE PRESENCIA</strong>
+    <p><a rel="" routerLink="/round">Registrar ronda</a></p>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="container">
+      <p><a rel="" routerLink="/device">Registrar dispositivo</a></p>
+      <p *ngIf="cod_uuid !== ''">{{cod_uuid}}</p>
+    </div>
+  </ion-toolbar>
+</ion-footer>

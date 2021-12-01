@@ -1,5 +1,5 @@
 {
-  "name": "myAppSCFP",
+  "name": "ionic-finger-scanner-app",
   "integrations": {
     "cordova": {},
     "capacitor": {}

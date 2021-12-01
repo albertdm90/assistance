@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>    
+    <ion-title>Registrar dispositivo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+<div class="container">
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card>
+          <ion-item>
+            <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
+            <ion-button fill="outline" slot="end" ion-button (click)="storage()">Registrar</ion-button>
+          </ion-item>
+        
+          <ion-card-content>
+            Recuerde que debe tener la opcion de "<strong>Regisrar dispositivo activa</strong>" en la Aplicación web
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  
+  </ion-grid>
+
+</div>
+</ion-content>
