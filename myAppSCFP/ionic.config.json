@@ -1,8 +1,0 @@
-{
-  "name": "ionic-finger-scanner-app",
-  "integrations": {
-    "cordova": {},
-    "capacitor": {}
-  },
-  "type": "angular"
-}
