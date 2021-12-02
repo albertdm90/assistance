@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Device;
 
+use App\Models\Configuration;
 use App\Models\Device;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -32,12 +33,16 @@ class IndexComponent extends Component
         ->orderBy('cod_uuid', 'ASC')
         ->paginate($this->row);
 
+        $configuration = Configuration::find(1);
+        $status_register_device = $configuration->status_register_device;
+
         $devices->map(function($device){
             $device->date = date('d/m/Y', strtotime($device->created_at));
         });
 
         return view('livewire.device.index-component', [
-            'devices' => $devices
+            'devices' => $devices,
+            'status_register_device' => $status_register_device
         ]);
     }
 
@@ -62,7 +67,14 @@ class IndexComponent extends Component
         );
     }
 
-    
-
-
+    public function updateStatus()
+    {
+        $configuration = Configuration::find(1);
+        $configuration->update([
+            'status_register_device' => !$configuration->status_register_device
+        ]);
+        $this->dispatchBrowserEvent(
+            'alert', ['type' => 'success', 'message' => 'Actualizado el estatus para registrar dispositivos']
+        );
+    }
 }
