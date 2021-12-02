@@ -18,6 +18,7 @@ class Round extends Model
         'rou_status',
         'rou_lat',
         'rou_long',
+        'cod_uuid',
     ];
 
     public function worker()

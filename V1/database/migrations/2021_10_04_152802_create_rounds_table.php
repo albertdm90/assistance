@@ -22,6 +22,7 @@ class CreateRoundsTable extends Migration
             $table->integer('rou_status')->default(0);
             $table->string('rou_lat')->nullable();
             $table->string('rou_long')->nullable();
+            $table->string('cod_uuid');
 
             $table->foreign('wor_id')->references('id')->on('workers')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('cp_id')->references('id')->on('checkpoints')->onDelete('cascade')->onUpdate('cascade');
