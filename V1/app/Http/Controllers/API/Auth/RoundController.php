@@ -45,7 +45,7 @@ class RoundController extends Controller
             'rou_time' => $request->rou_time,
             'cod_uuid' => $request->cod_uuid,
             'rou_lat' => $request->rou_lat,
-            'rou_lon' => $request->rou_lon,
+            'rou_long' => $request->rou_long,
         ]);
 
         return response()->json([

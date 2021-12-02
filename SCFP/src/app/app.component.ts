@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { RoundService } from './services/round.service';
+import { Plugins } from '@capacitor/core';
+
+const { Network } = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -19,13 +22,15 @@ export class AppComponent {
   }
 
 
-  storeRound()
+  async storeRound()
   {
     const rounds: any = JSON.parse(localStorage.getItem('rounds'));
     // localStorage.setItem('rounds', null);
+    let status = await Network.getStatus();
+
     if(rounds != null){
       rounds.map(round => {
-        if(navigator.onLine) {
+        if(status.connected) {
           this.roundService.storeRound(round).subscribe(res =>  {
             console.log(res);
           });

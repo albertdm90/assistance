@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
-// import { Geolocation } from '@capacitor/geolocation';
 import { RoundService } from './../services/round.service';
+import { Plugins } from '@capacitor/core';
+
+const { Geolocation } = Plugins;
 
 @Component({
   selector: 'app-round',
@@ -44,7 +46,7 @@ export class RoundPage implements OnInit {
   }
 
 
-  submitForm(){
+  async submitForm(){
     let send:boolean = true;
     let rounds:any = JSON.parse(localStorage.getItem('rounds'));
     // Geolocation.requestPermissions().then(async permission => {
@@ -64,6 +66,9 @@ export class RoundPage implements OnInit {
       this.presentToast('danger', 'Ingrese PIN');
     }
 
+    const coordinates = await Geolocation.getCurrentPosition();
+    console.log('Current', coordinates.coords.longitude);
+
     if(send){
       let date = new Date();
       let year = date.getFullYear();
@@ -79,8 +84,8 @@ export class RoundPage implements OnInit {
         wor_pin: this.wor_pin,
         rou_date: `${year}-${month}-${day}`,
         rou_time: `${hour}:${minute}:${second}`,
-        rou_lat: this.lat,
-        rou_lon: this.lon,
+        rou_lat: coordinates.coords.latitude,
+        rou_long: coordinates.coords.longitude,
         cod_uuid: localStorage.getItem('cod_uuid'),
       }
 
