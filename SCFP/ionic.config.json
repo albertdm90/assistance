@@ -1,5 +1,5 @@
 {
-  "name": "SCFP",
+  "name": "myApp",
   "integrations": {
     "capacitor": {}
   },
