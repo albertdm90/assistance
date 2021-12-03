@@ -5,6 +5,7 @@ import { RoundService } from './../services/round.service';
 import { Plugins } from '@capacitor/core';
 
 const { Geolocation } = Plugins;
+const { Network } = Plugins;
 
 @Component({
   selector: 'app-round',
@@ -20,6 +21,7 @@ export class RoundPage implements OnInit {
   wor_pin: any = '';
   lat:string = '';
   lon:string = '';
+  statusConnected:boolean = false;
 
   constructor(
     public toastController: ToastController,
@@ -27,13 +29,17 @@ export class RoundPage implements OnInit {
     private roundService: RoundService,
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.checkpoints = JSON.parse(localStorage.getItem('ckeckpoints'));
+    let status2 = await Network.getStatus();
+    this.statusConnected = status2.connected;
   }
 
   scaner()
   {
     this.roundService.indexCheckPoints().subscribe(res =>  {
       this.checkpoints = res;
+      localStorage.setItem('ckeckpoints', JSON.stringify(res));
     });
   }
 
@@ -49,13 +55,7 @@ export class RoundPage implements OnInit {
   async submitForm(){
     let send:boolean = true;
     let rounds:any = JSON.parse(localStorage.getItem('rounds'));
-    // Geolocation.requestPermissions().then(async permission => {
-    //   const coordinates = await Geolocation.getCurrentPosition();
-    //   console.log(coordinates);
-    // }).catch(err => {
-    //   console.error(err)
-    // });
-
+    let roundsCount:number = JSON.parse(localStorage.getItem('roundsCount'));
     
     if(this.wor_id_number ==  null || this.wor_id_number ==  '' ){
       send = false;
@@ -72,28 +72,31 @@ export class RoundPage implements OnInit {
     if(send){
       let date = new Date();
       let year = date.getFullYear();
-      let month = date.getMonth() > 9 ? date.getMonth() : `0${date.getMonth()}`;
-      let day = date.getDay() > 9 ? date.getDay() : `0${date.getDay()}`;
+      let month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth() + 1}`;
+      let day = date.getDate() +1 > 9 ? date.getDate() : `0${date.getDate()}`;
+      const rou_date = `${year}-${month}-${day}`;
       let hour = date.getHours() > 9 ? date.getHours() : `0${date.getHours()}`;
       let minute = date.getMinutes() > 9 ? date.getMinutes() : `0${date.getMinutes()}`;
       let second = date.getSeconds() > 9 ? date.getSeconds() : `0${date.getSeconds()}`;
+      const rou_time = `${hour}:${minute}:${second}`;
 
       const data = {
         cp_code: this.cp_code,
         wor_id_number: this.wor_id_number,
         wor_pin: this.wor_pin,
-        rou_date: `${year}-${month}-${day}`,
-        rou_time: `${hour}:${minute}:${second}`,
+        rou_date,
+        rou_time,
         rou_lat: coordinates.coords.latitude,
         rou_long: coordinates.coords.longitude,
         cod_uuid: localStorage.getItem('cod_uuid'),
       }
-
-      console.log(data);
       rounds != null ? rounds.push(data) : rounds = [data];
       localStorage.setItem('rounds', JSON.stringify(rounds));
+      roundsCount = parseInt(roundsCount++);
+      localStorage.setItem('roundsCount', JSON.stringify(roundsCount));
       this.presentToast('success', 'Registro creado');
       this.router.navigate(['/']);
+      this.cp_code = '';
     }
 
     

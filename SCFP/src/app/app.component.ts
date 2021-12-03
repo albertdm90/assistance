@@ -37,6 +37,7 @@ export class AppComponent {
         }
       });
       localStorage.setItem('rounds', null);
+      localStorage.setItem('roundsCount', '0');
     }
   }
 }

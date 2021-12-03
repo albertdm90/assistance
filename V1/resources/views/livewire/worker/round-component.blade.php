@@ -1,6 +1,6 @@
-<form method="post" class="needs-validation">
+<div method="post" class="needs-validation">
+  <ul class="list-unstyled list-unstyled-border">
     @forelse ($rounds as $key => $round)
-    <ul class="list-unstyled list-unstyled-border">
         <li class="media">
           <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" wire:model="rounds_id.{{ $key }}" id="cbx-{{ $key }}" value="{{ $round->id }}">
@@ -12,10 +12,10 @@
             <div class="text-small text-muted">{{ $round->date }} <div class="bullet"></div> {{ $round->hour }}</div>
           </div>
         </li>
-      </ul>
-    @empty
-      <span>Sin resultados</span>
-    @endforelse
+        @empty
+        <span>Sin resultados</span>
+        @endforelse
+    </ul>
     @if (count($rounds) > 0)
         <div class="card-footer text-right">
             <button class="btn btn-success" type="button" wire:click="updateAll(2)">Verificar</button>
@@ -23,4 +23,4 @@
             <button class="btn btn btn-outline-danger" type="button" wire:click="$emit('delete', '', 'worker.round-component', 'deleteAll')">Eliminar definitivamente</button>
         </div>
     @endif
-  </form>
+  </div>

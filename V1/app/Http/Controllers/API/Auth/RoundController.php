@@ -13,7 +13,7 @@ class RoundController extends Controller
 {
     public function index() 
     {
-        $checkpoints = Checkpoint::all(['id', 'cp_description', 'cp_code']);
+        $checkpoints = Checkpoint::select('id', 'cp_description', 'cp_code')->where('cp_status', true)->get();
         return response()->json([
             'checkpoints' => $checkpoints
         ], 200);

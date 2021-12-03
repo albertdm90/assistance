@@ -20,7 +20,7 @@ class RoundComponent extends Component
             )->join('workers', 'workers.id', 'rounds.wor_id')
             ->join('checkpoints', 'checkpoints.id', 'rounds.cp_id')
             ->where('workers.id', $this->wor_id)
-            ->orderBy('rounds.created_at', 'ASC')
+            ->orderBy('rounds.rou_date', 'DESC')
             ->get();
 
         $rounds->map(function($round){
