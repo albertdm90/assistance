@@ -25,7 +25,15 @@ export class DevicePage implements OnInit {
   async storage()
   {
     const info = await Device.getInfo();
-    this.registerService.storeDevice(info.uuid).subscribe(res =>  {
+    const data = {
+      cod_uuid: info.uuid,
+      platform: info.platform,
+      version: info.osVersion,
+      operating: info.operatingSystem,
+      model: info.model,
+    }
+    
+    this.registerService.storeDevice(data).subscribe(res =>  {
       if(res.message === 'Success'){
         this.router.navigate(['/']);
         this.presentToast('success', 'Registro de dispositivo exitoso');
@@ -33,16 +41,17 @@ export class DevicePage implements OnInit {
         this.presentToast('danger', 'Error. Este dispositivo se encuentra registrado o no tiene permisos para registrar');
       }
     }, err => {
-      console.error(err)
+      console.log(err)
+      this.presentToast('danger', err.message);
     });
   }
 
   async presentToast(color, message) {
     const toast = await this.toastController.create({
       message,
-      position: 'top',
+      position: 'bottom',
       color,
-      duration: 2000
+      duration: 5000
     });
     toast.present();
   }

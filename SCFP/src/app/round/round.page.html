@@ -47,20 +47,20 @@
           <ion-grid>
             <ion-row>
               <ion-col size="12" class="ion-align-self-center" class="text-center">
-                <img class="img" src="https://www.abraxascs.com/web/wp-content/uploads/2019/05/vigilancia_tauro_seguridad.png" alt="">
+                <img class="img" src="assets/img/logo2.png" alt="" width="50%">
               </ion-col>
               
               <ion-col size="12" class="m-t-5">
                 <ion-item>
                   <ion-label position="floating">Número de identificación</ion-label>
-                  <ion-input [(ngModel)]="wor_id_number" name="wor_id_number" required></ion-input>
+                  <ion-input type="number" [(ngModel)]="wor_id_number" name="wor_id_number" required></ion-input>
                 </ion-item>
                 <!-- <ion-input  placeholder="Ingrese su número de identificación" class="text-center"></ion-input> -->
               </ion-col>
               <ion-col size="12" class="m-t-5">
                 <ion-item>
                   <ion-label position="floating">PIN</ion-label>
-                  <ion-input type="password" pattern="[0-9]*" [(ngModel)]="wor_pin" name="wor_pin"></ion-input>
+                  <ion-input inputmode="numeric" pattern="[0-9]*" [(ngModel)]="wor_pin" name="wor_pin"></ion-input>
                 </ion-item>
                 <!-- <ion-input type="password" class="text-center" placeholder="Ingrese su pin"></ion-input> -->
               </ion-col>

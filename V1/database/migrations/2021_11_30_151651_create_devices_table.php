@@ -16,6 +16,10 @@ class CreateDevicesTable extends Migration
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
             $table->string('cod_uuid')->unique();
+            $table->string('model')->nullable();
+            $table->string('operating')->nullable();
+            $table->string('version')->nullable();
+            $table->string('platform')->nullable();
             $table->timestamps();
         });
     }

@@ -93,7 +93,7 @@ export class RoundPage implements OnInit {
       rounds != null ? rounds.push(data) : rounds = [data];
       localStorage.setItem('rounds', JSON.stringify(rounds));
       this.presentToast('success', 'Registro creado');
-      // this.router.navigate(['/']);
+      this.router.navigate(['/']);
     }
 
     
@@ -101,7 +101,7 @@ export class RoundPage implements OnInit {
   async presentToast(color, message) {
     const toast = await this.toastController.create({
       message,
-      position: 'top',
+      position: 'bottom',
       color,
       duration: 2000
     });

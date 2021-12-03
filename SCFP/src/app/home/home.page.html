@@ -1,17 +1,27 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+  <!-- <img src="assets/img/background.jpeg" class="background"> -->
   <div class="container">
-    <strong>SISTEMA DE CONTROL Y FIJACIÓN DE PRESENCIA</strong>
-    <p><a rel="" routerLink="/round">Registrar ronda</a></p>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <img src="assets/img/logo1.png" width="50%">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h3>
+            <strong>SISTEMA DE CONTROL Y FIJACIÓN DE PRESENCIA</strong>
+          </h3>
+          <p><a rel="" routerLink="/round">Registrar ronda</a></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>
 
-<ion-footer>
+<ion-footer class="myColor">
   <ion-toolbar>
     <div class="container">
       <p><a rel="" routerLink="/device">Registrar dispositivo</a></p>

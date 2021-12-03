@@ -22,12 +22,8 @@ export class RegisterService {
     private httpClient: HttpClient
   ) { }
 
-  storeDevice(uuid)
+  storeDevice(data)
   {
-    const data = {
-      cod_uuid: uuid
-    }
-
     localStorage.setItem('cod_uuid', data.cod_uuid);
     return this.httpClient.post(`${this.url}`, data, this.httpOptions)
       .pipe(map( (res:any) => {

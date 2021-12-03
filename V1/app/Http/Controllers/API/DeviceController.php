@@ -15,15 +15,22 @@ class DeviceController extends Controller
             'cod_uuid' => 'required|unique:devices,cod_uuid',
         ]);
 
+
         $configuration = Configuration::find(1);
         if(!$configuration->status_register_device)
             return response()->json([
                 'message' => 'Error',
             ], 200);
         
+        
         $device = Device::create([
-            'cod_uuid' => $request->cod_uuid
+            'cod_uuid' => $request->cod_uuid,
+            'model' => $request->model,
+            'operating' => $request->operating,
+            'version' => $request->version,
+            'platform' => $request->platform
         ]);
+
 
         $configuration->update([
             'status_register_device' => false

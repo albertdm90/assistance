@@ -10,6 +10,10 @@ class Device extends Model
     protected $table = 'devices';
     protected $fillable = [
         'cod_uuid',
+        'model',
+        'operating',
+        'version',
+        'platform',
     ];
 
     use HasFactory;

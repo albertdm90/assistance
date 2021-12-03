@@ -29,9 +29,21 @@
 
             @forelse ($rounds as $key => $round)
             <tr>
-              <td class="text-muted">{{ $round->register }}</td>
+              <td class="text-muted">
+                <ul style="list-style: none;padding-inline-start: 0;">
+                  <li>{{ $round->register }}</li>
+                  <li>{{ $round->cod_uuid }}</li>
+                </ul>
+                
+              </td>
               <td>{!! $round->worker !!}</td>
-              <td>{{ $round->checkpoint }}</td>
+              <td>
+                <ul style="list-style: none;padding-inline-start: 0;">
+                  <li>{{ $round->checkpoint }}</li>
+                  <li>Latitud: {{ $round->rou_lat }}</li>
+                  <li>Longitud: {{ $round->rou_long }}</li>
+                </ul>
+              </td>
               <td width="100px">{{ $round->date }}</td>
               <td width="100px">{{ $round->hour }}</td>
               <td width="100px" class="text-center">{!! $round->status !!}</td>
