@@ -19,13 +19,12 @@ class UpdatePinComponent extends Component
 
     public function update()
     {
-        $characters = '0123456789';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < 6; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        $status = false;
+        while ($status == false) {
+            $this->wor_pin = str_pad(mt_Rand(0, 999999), 6, '0', STR_PAD_LEFT);
+            $worker_count = Worker::where('wor_pin', $this->wor_pin)->count();
+            $status = $worker_count == 0 ? true : false;
         }
-        $this->wor_pin = $randomString;
 
         $worker = Worker::find($this->wor_id);
         $worker->update([

@@ -15,7 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call(UsersSeeder::class);
-        $this->call(PositionSeeder::class);
         $this->call(CheckPointSeeder::class);
         $this->call(WorkerSeeder::class);
         $this->call(WorkSheduleSeeder::class);

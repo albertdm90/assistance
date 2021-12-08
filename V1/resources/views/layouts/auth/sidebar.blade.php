@@ -15,13 +15,6 @@
         <a href="{{ route('device.index') }}" class="nav-link"><i class="fas fa-tablet"></i><span>Dispositivos</span></a>
       </li>
       <li class="{{request()->routeIs([
-        'position.index',
-        'position.create',
-        'position.edit',
-      ]) ? 'active' : '' }}">
-        <a href="{{ route('position.index') }}" class="nav-link"><i class="fas fa-user-tag"></i><span>Cargos</span></a>
-      </li>
-      <li class="{{request()->routeIs([
         'worker.index',
         'worker.create',
         'worker.edit',

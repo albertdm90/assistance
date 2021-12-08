@@ -17,7 +17,6 @@ export class RoundPage implements OnInit {
   checkpoints:any = [];
   status:any = false;
   cp_code:any = '';
-  wor_id_number: any = '';
   wor_pin: any = '';
   lat:string = '';
   lon:string = '';
@@ -65,10 +64,6 @@ export class RoundPage implements OnInit {
     let rounds:any = JSON.parse(localStorage.getItem('rounds'));
     let roundsCount:any = JSON.parse(localStorage.getItem('roundsCount'));
     
-    if(this.wor_id_number ==  null || this.wor_id_number ==  '' ){
-      send = false;
-      this.presentToast('danger', 'Ingrese número de identificación');
-    }
     if(this.wor_pin ==  null || this.wor_pin ==  ''){
       send = false;
       this.presentToast('danger', 'Ingrese PIN');
@@ -90,7 +85,6 @@ export class RoundPage implements OnInit {
 
       const data = {
         cp_code: this.cp_code,
-        wor_id_number: this.wor_id_number,
         wor_pin: this.wor_pin,
         rou_date,
         rou_time,

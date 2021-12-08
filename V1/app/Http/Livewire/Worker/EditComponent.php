@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Worker;
 
-use App\Models\Position;
 use App\Models\Worker;
 use Livewire\Component;
 
@@ -50,10 +49,7 @@ class EditComponent extends Component
 
     public function render()
     {
-        $positions = Position::all();
-        return view('livewire.worker.edit-component',[
-            'positions' => $positions
-        ]);
+        return view('livewire.worker.edit-component');
     }
 
     public function update()
@@ -66,7 +62,6 @@ class EditComponent extends Component
             'wor_email' => 'required|email',
             'wor_home_address' => 'nullable',
             'wor_type_contract' => 'nullable',
-            'pos_id' => 'required',
         ]);
 
         $this->worker->update([
@@ -77,7 +72,6 @@ class EditComponent extends Component
             'wor_email' => $this->wor_email,
             'wor_home_address' => $this->wor_home_address,
             'wor_type_contract' => $this->wor_type_contract,
-            'pos_id' => $this->pos_id,
         ]);
 
         $this->dispatchBrowserEvent(

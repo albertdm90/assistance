@@ -1,9 +1,7 @@
 <div class="card card-primary">
     <div class="card-header">
         <h4>Supervisión de rondas</h4>
-        <div class="card-header-action">
-          <a href="{{ route('position.create') }}" class="btn btn-primary btn-icon icon-right">Crear <i class="fas fa-chevron-right"></i></a>
-        </div>
+        
     </div>
     @if (isset($search) && isset($row))
       <div class="card-header text-right " style="display: block;">

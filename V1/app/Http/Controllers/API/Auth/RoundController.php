@@ -22,14 +22,13 @@ class RoundController extends Controller
     public function store(Request $request)
     {
         $validate = $request->validate([
-            'wor_id_number' => 'required',
             'cp_code' => 'required',
             'cod_uuid' => 'required',
             'wor_pin' => 'required',
         ]);
 
         $device = Device::where('cod_uuid', $request->cod_uuid)->count();
-        $worker = Worker::where('wor_id_number', $request->wor_id_number)->where('wor_pin', $request->wor_pin)->first();
+        $worker = Worker::where('wor_pin', $request->wor_pin)->first();
         
         $checkpoint = Checkpoint::where('cp_code', $request->cp_code)->first();
 

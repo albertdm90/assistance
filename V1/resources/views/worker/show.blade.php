@@ -14,9 +14,9 @@
               <div class="author-box-name">
                 <a href="#">{{ $worker->wor_name.' '.$worker->wor_lastname }}</a>
               </div>
-              @if (isset($worker->position->pos_name))  
-                <div class="author-box-job">{{ $worker->position->pos_name }} <br> {{ $worker->wor_type_contract }}</div>
-              @endif
+
+              <div class="author-box-job"> {{ $worker->wor_type_contract }}</div>
+
             </div>
   
           </div>
