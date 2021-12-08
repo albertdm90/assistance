@@ -40,8 +40,8 @@ class WorkScheduleComponent extends Component
         $checkponits = Checkpoint::all(['id', 'cp_description']);
 
         $workSchedules->map(function($workSchedule){
-            $ws_start_time = date('h:m A', strtotime($workSchedule->ws_start_time));
-            $ws_end_time = date('h:m A', strtotime($workSchedule->ws_end_time));
+            $ws_start_time = date('h:i A', strtotime($workSchedule->ws_start_time));
+            $ws_end_time = date('h:i A', strtotime($workSchedule->ws_end_time));
             $workSchedule->hour = "Desde: $ws_start_time - Hasta: $ws_end_time";
             switch ($workSchedule->ws_day) {
                 case 0:
@@ -101,6 +101,7 @@ class WorkScheduleComponent extends Component
             ->whereTime('ws_start_time', '<=', $this->ws_start_time)
             ->whereTime('ws_end_time', '>=', $this->ws_end_time)
             ->count();
+
             
         if($workSchedule > 0){
             $this->dispatchBrowserEvent(

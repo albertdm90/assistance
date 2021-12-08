@@ -5,13 +5,27 @@ namespace App\Http\Livewire\Worker;
 use App\Models\Round;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class RoundComponent extends Component
 {
+    use WithPagination;
+
     public $wor_id = '';
     public $rounds_id = [];
+    public $row = 20;
 
     protected $listeners = ['deleteAll'];
+
+    public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function paginationView()
+    {
+        return 'vendor.pagination.otika';
+    }
 
     public function render()
     {
@@ -21,36 +35,17 @@ class RoundComponent extends Component
             ->join('checkpoints', 'checkpoints.id', 'rounds.cp_id')
             ->where('workers.id', $this->wor_id)
             ->orderBy('rounds.rou_date', 'DESC')
-            ->get();
+            ->orderBy('rounds.rou_time', 'DESC')
+            ->paginate($this->row);
 
         $rounds->map(function($round){
             $round->date = date('d-m-Y', strtotime($round->rou_date));
             $round->hour = date('h:i A', strtotime($round->rou_time));
-            $round->status = '<div class="badge badge-pill badge-warning mb-1 float-right">Nuevo</div>';
-            switch ($round->rou_status) {
-                case 0:
-                    $round->status = '<div class="badge badge-pill badge-warning mb-1 float-right">Nuevo</div>';
-                    break;
-                case 1:
-                    $round->status = '<div class="badge badge-pill badge-primary mb-1 float-right">Visto</div>';
-                    break;
-                case 2:
-                    $round->status = '<div class="badge badge-pill badge-success mb-1 float-right">Verificado</div>';
-                    break;
-                case 3:
-                    $round->status = '<div class="badge badge-pill badge-danger mb-1 float-right">Eliminado</div>';
-                    break;
-                
-                default:
-                    $round->status = '<div class="badge badge-pill badge-warning mb-1 float-right">Nuevo</div>';
-                    break;
-            }
-        });
 
-        DB::table('rounds')
-            ->where('rou_status', 0)
-            ->where('wor_id', $this->wor_id)
-            ->update(['rou_status' => 1]);
+            $round->status = $round->rou_status == 0 
+            ? '<button class="btn btn-icon btn-warning btn-sm float-right" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro fuera del horario del empleado" data-original-title="Atención"><i class="fas fa-times"></i></button>'
+            : '<button class="btn btn-icon btn-success btn-sm float-right" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro creado en horario del empleado" data-original-title="Atención"><i class="fas fa-check"></i></button>';
+        });
        
         return view('livewire.worker.round-component', [
             'rounds' => $rounds

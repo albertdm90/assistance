@@ -7,6 +7,7 @@ use App\Models\Checkpoint;
 use App\Models\Device;
 use App\Models\Round;
 use App\Models\Worker;
+use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
 
 class RoundController extends Controller
@@ -21,6 +22,7 @@ class RoundController extends Controller
 
     public function store(Request $request)
     {
+
         $validate = $request->validate([
             'cp_code' => 'required',
             'cod_uuid' => 'required',
@@ -37,6 +39,17 @@ class RoundController extends Controller
                 'message' => 'Error'
             ], 200);
 
+        $time = date('H:i:s', strtotime($request->rou_time));
+        $day = date('N', strtotime($request->rou_date)) - 1;
+        $workScheduleStatus = WorkSchedule::where('wor_id', $worker->id)
+            ->where('cp_id', $checkpoint->id)
+            ->where('ws_day', $day)
+            ->where(function($query) use ($time){
+                $query->whereTime('ws_start_time', '<=', $time)
+                    ->whereTime('ws_end_time', '>=', $time);
+                })
+            ->count();
+
         $round = Round::create([
             'wor_id' => $worker->id,
             'cp_id' => $checkpoint->id,
@@ -45,6 +58,7 @@ class RoundController extends Controller
             'cod_uuid' => $request->cod_uuid,
             'rou_lat' => $request->rou_lat,
             'rou_long' => $request->rou_long,
+            'rou_status' => $workScheduleStatus,
         ]);
 
         return response()->json([
