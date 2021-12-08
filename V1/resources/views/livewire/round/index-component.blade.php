@@ -36,11 +36,15 @@
               </td>
               <td>{!! $round->worker !!}</td>
               <td>
-                <ul style="list-style: none;padding-inline-start: 0;">
-                  <li>{{ $round->checkpoint }}</li>
-                  <li>Latitud: {{ $round->rou_lat }}</li>
-                  <li>Longitud: {{ $round->rou_long }}</li>
-                </ul>
+                @if (isset($round->rou_lat) && isset($round->rou_long))    
+                  <a href="{{ route('maps', ['lat' => $round->rou_lat, 'long' => $round->rou_long]) }}" target="blank" class="btn btn-sm btn-primary">
+                    <i class="fas fa-map-marker"></i>
+                  </a>
+                @endif
+
+                
+                {{ $round->checkpoint }}
+           
               </td>
               <td width="100px">{{ $round->date }}</td>
               <td width="100px">{{ $round->hour }}</td>
