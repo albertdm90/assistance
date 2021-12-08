@@ -49,7 +49,7 @@
                 <a class="btn btn-icon btn-info btn-action" href="{{ route('worker.show', $round->wor_id) }}">
                   <i class="fas fa-eye"></i>
                 </a>
-                <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a>
+                {{-- <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a> --}}
               </td>
             </tr>
             @empty

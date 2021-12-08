@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1">
           <div class="login-brand">
-            Sistema de control y fijación de presencia (SCFP)
+            Sistema de control de Rondas (SCR)
           </div>
           <div class="card card-primary">
             <div class="row m-0">
@@ -55,7 +55,7 @@
             </div>
           </div>
           <div class="simple-footer">
-            Copyright &copy; SCFP {{ date('Y') }}
+            Copyright &copy; SCR {{ date('Y') }}
           </div>
         </div>
       </div>

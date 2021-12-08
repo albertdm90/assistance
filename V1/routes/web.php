@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
+
+Route::get('/logoutClient', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout.index');
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
-    Route::get('/logoutClient', function () {
-        Auth::logout();
-        return back();
-    })->name('logout.index');
-    
+        
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::view('/device', 'device.index')->name('device.index');
     
