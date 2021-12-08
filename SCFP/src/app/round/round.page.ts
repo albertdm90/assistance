@@ -33,6 +33,14 @@ export class RoundPage implements OnInit {
     this.checkpoints = JSON.parse(localStorage.getItem('ckeckpoints'));
     let status2 = await Network.getStatus();
     this.statusConnected = status2.connected;
+    this.timeStore();
+  }
+
+  timeStore()
+  {
+    setTimeout(() =>{
+      this.router.navigateByUrl('/');
+    }, 30000);
   }
 
   scaner()
@@ -55,7 +63,7 @@ export class RoundPage implements OnInit {
   async submitForm(){
     let send:boolean = true;
     let rounds:any = JSON.parse(localStorage.getItem('rounds'));
-    let roundsCount:number = JSON.parse(localStorage.getItem('roundsCount'));
+    let roundsCount:any = JSON.parse(localStorage.getItem('roundsCount'));
     
     if(this.wor_id_number ==  null || this.wor_id_number ==  '' ){
       send = false;
@@ -92,7 +100,7 @@ export class RoundPage implements OnInit {
       }
       rounds != null ? rounds.push(data) : rounds = [data];
       localStorage.setItem('rounds', JSON.stringify(rounds));
-      roundsCount = parseInt(roundsCount++);
+      roundsCount = parseInt(roundsCount) + 1;
       localStorage.setItem('roundsCount', JSON.stringify(roundsCount));
       this.presentToast('success', 'Registro creado');
       this.router.navigate(['/']);

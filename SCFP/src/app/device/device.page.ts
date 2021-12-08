@@ -35,7 +35,7 @@ export class DevicePage implements OnInit {
     
     this.registerService.storeDevice(data).subscribe(res =>  {
       if(res.message === 'Success'){
-        this.router.navigate(['/']);
+        this.router.navigateByUrl('/');
         this.presentToast('success', 'Registro de dispositivo exitoso');
       }else{
         this.presentToast('danger', 'Error. Este dispositivo se encuentra registrado o no tiene permisos para registrar');

@@ -40,7 +40,9 @@ class WorkScheduleComponent extends Component
         $checkponits = Checkpoint::all(['id', 'cp_description']);
 
         $workSchedules->map(function($workSchedule){
-            $workSchedule->hour = "Desde: $workSchedule->ws_start_time - Hasta: $workSchedule->ws_end_time";
+            $ws_start_time = date('h:m A', strtotime($workSchedule->ws_start_time));
+            $ws_end_time = date('h:m A', strtotime($workSchedule->ws_end_time));
+            $workSchedule->hour = "Desde: $ws_start_time - Hasta: $ws_end_time";
             switch ($workSchedule->ws_day) {
                 case 0:
                     $workSchedule->day = 'Lunes';

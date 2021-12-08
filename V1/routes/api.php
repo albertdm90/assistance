@@ -19,9 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['middleware' => ['cors']], function () {
-    Route::get('test', function () {
-        return 'Run';
-    });
+    Route::get('test', 'Api\TestController@index');
     Route::post('/device', 'Api\DeviceController@store');    
     Route::get('/chekpoints', 'Api\Auth\RoundController@index');
     Route::post('/round', 'Api\Auth\RoundController@store');
