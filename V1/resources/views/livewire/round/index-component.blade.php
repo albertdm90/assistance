@@ -15,12 +15,11 @@
         <table class="table table-sm table-bordered table-hover">
           <thead>
             <tr class="primary">
-              <th scope="col">Registro</th>
-              <th scope="col">Trabajador</th>
-              <th scope="col">Lugar</th>
-              <th scope="col" colspan="2">Fecha y hora de la rondas</th>
-              <th scope="col">Estatus</th>
-              <th scope="col">Acciones</th>
+              <th scope="col" width="20%">Registro</th>
+              <th scope="col" width="20%">Trabajador</th>
+              <th scope="col" width="20%">Lugar</th>
+              <th scope="col" colspan="2" width="30%">Fecha y hora de la rondas</th>
+              <th scope="col" width="10%">Acciones</th>
             </tr>
           </thead>
           <tbody>
@@ -46,11 +45,11 @@
                 {{ $round->checkpoint }}
            
               </td>
-              <td width="100px">{{ $round->date }}</td>
+              <td width="50px">{{ $round->date }}</td>
               <td width="100px">{{ $round->hour }}</td>
-              <td width="100px" class="text-center">{!! $round->status !!}</td>
-              <td width="100px">
-                <a class="btn btn-icon btn-info btn-action" href="{{ route('worker.show', $round->wor_id) }}">
+              <td width="100px" class="text-right">
+                {!! $round->status !!}
+                <a class="btn btn-icon btn-info btn-action m-r-5" href="{{ route('round.show', $round->wor_id) }}">
                   <i class="fas fa-eye"></i>
                 </a>
                 {{-- <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a> --}}

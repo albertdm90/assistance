@@ -63,6 +63,11 @@ Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
 
     Route::prefix('/round')->group(function () {
         Route::view('/', 'round.index')->name('round.index');
+        Route::get('/show/{id}', function ($id) {
+            return view('round.show',[
+                'rou_id' => $id
+            ]);
+        })->name('round.show');
     });
 
     Route::get('maps/{lat}/{long}', function ($lat, $long) {

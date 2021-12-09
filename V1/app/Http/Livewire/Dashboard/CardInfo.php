@@ -37,7 +37,7 @@ class CardInfo extends Component
 
             case 'round':
                 $result = $this->roundsCount();
-                $title = 'Nueva rondas registradas';
+                $title = 'Rondas registradas';
                 $img = 'assets/img/banner/3.png';
                 // $note = '<p class="mb-0"><span class="col-green">'.$result['active'].'%</span> Activo</p>';
                 $data = $result['total'];
@@ -74,7 +74,7 @@ class CardInfo extends Component
 
     public function roundsCount()
     {
-        $data['total'] = Round::where('rou_status', 0)->count();
+        $data['total'] = Round::count();
         return $data;
     }
 }

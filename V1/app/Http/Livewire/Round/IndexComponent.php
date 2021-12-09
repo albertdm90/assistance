@@ -47,8 +47,8 @@ class IndexComponent extends Component
             $round->worker = "$round->wor_id_number - $round->wor_name $round->wor_lastname";
             $round->checkpoint = "$round->cp_description";
             $round->status = $round->rou_status == 0 
-            ? '<button class="btn btn-icon btn-warning btn-block btn-sm" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro fuera del horario del empleado" data-original-title="Atención"><i class="fas fa-times"></i></button>'
-            : '<button class="btn btn-icon btn-success btn-block btn-sm" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro creado en horario del empleado" data-original-title="Atención"><i class="fas fa-check"></i></button>';
+            ? '<button class="btn btn-icon btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro fuera del horario del empleado" data-original-title="Atención"><i class="fas fa-times"></i></button>'
+            : '<button class="btn btn-icon btn-success" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro creado en horario del empleado" data-original-title="Atención"><i class="fas fa-check"></i></button>';
         });
 
         return view('livewire.round.index-component',[

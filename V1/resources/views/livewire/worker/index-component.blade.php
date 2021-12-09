@@ -4,7 +4,7 @@
         <div class="card-header-action">
 
           <div class="dropdown ">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Opciones
             </button>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
@@ -33,7 +33,7 @@
               <th scope="col">#</th>
               <th scope="col">Identificación</th>
               <th scope="col">Empleado</th>
-              <th scope="col" class="text-center">Estatus de la huella</th>
+              <th scope="col" class="text-center">Estatus</th>
               <th scope="col">Fecha de creación</th>
               <th scope="col">Acciones</th>
             </tr>

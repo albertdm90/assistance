@@ -9,13 +9,13 @@
           <div class="media-body">
             {!! $round->status !!}
             
-            <h6 class="media-title"><a href="javascript:void(0)">
+            <h6 class="media-title">
               @if (isset($round->rou_lat) && isset($round->rou_long))    
                 <a href="{{ route('maps', ['lat' => $round->rou_lat, 'long' => $round->rou_long]) }}" target="blank" class="btn btn-sm btn-primary">
                   <i class="fas fa-map-marker"></i>
                 </a>
               @endif
-              {{ $round->cp_description }}</a>
+              <a href="{{ route('round.show', $round->id) }}">{{ $round->cp_description }}</a>
             </h6>
             <div class="text-small text-muted">{{ $round->date }} <div class="bullet"></div> {{ $round->hour }}</div>
           </div>

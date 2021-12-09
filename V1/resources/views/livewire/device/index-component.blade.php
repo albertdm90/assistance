@@ -1,10 +1,32 @@
 <div class="card card-primary">
     <div class="card-header">
-        <h4>Dispositivos registrados</h4>
-        <div class="card-header-action">
+        <h4>Dispositivos registrados {!! $status_register_device ? '<span class="text-success">Esperando registro</span>' : '' !!} </h4>
+        {{-- <div class="card-header-action">
           <a href="javascript:void(0)" wire:click="destroyAll()" class="btn btn-danger btn-icon icon-right">Eliminar todos <i class="fas fa-trash"></i></a>
           <a href="javascript:void(0)" wire:click="updateStatus()" class="btn {{ $status_register_device ? 'btn-success' : 'btn-danger'}} btn-icon icon-right">Registro de dispositivos {{ $status_register_device ? 'activo' : 'desactivado' }}</a>
+        </div> --}}
+
+        <div class="card-header-action">
+
+          <div class="dropdown ">
+            <button class="btn btn-outline-info dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Opciones
+            </button>
+            <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+              <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="destroyAll()"><i class="fas fa-trash"></i> Eliminar todos</a>
+              <a class="dropdown-item has-icon {{ $status_register_device ? 'text-success' : 'text-danger'}}" href="javascript:void(0)" wire:click="updateStatus()">
+                @if ($status_register_device)
+                  <i class="fas fa-check"></i> 
+                  Registro activado
+                @else
+                  <i class="fas fa-times"></i> 
+                  Registro desactivado
+                @endif
+              </a>
+            </div>
+          </div>
         </div>
+
     </div>
     @if (isset($search) && isset($row))
       <div class="card-header text-right " style="display: block;">

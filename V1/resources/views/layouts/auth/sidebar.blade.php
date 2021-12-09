@@ -25,7 +25,7 @@
       <li class="{{request()->routeIs('checkpoint.index') ? 'active' : '' }}">
         <a href="{{ route('checkpoint.index') }}" class="nav-link"><i class="fas fa-location-arrow"></i><span>Puntos de control</span></a>
       </li>
-      <li class="{{request()->routeIs('round.index') ? 'active' : '' }}">
+      <li class="{{request()->routeIs(['round.index', 'round.show']) ? 'active' : '' }}">
         <a href="{{ route('round.index') }}" class="nav-link"><i class="fab fa-dochub"></i><span>Reportes de rondas</span></a>
       </li>
     </ul>

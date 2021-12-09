@@ -3,7 +3,7 @@
 @section('content')
 <div class="row clearfix justify-content-center">
   <div class="col-12">
-    <a href="javascript:close_tab();" class="btn btn-danger">Cerrar</a>
+    <a href="javascript:close_tab();" class="btn btn-danger m-b-5">Cerrar</a>
     <iframe src="{{ 'http://maps.google.com/maps?q='.$lat.','.$long.'&z=15&output=embed'}}" style="width:100%; height:100vh"></iframe>
   </div>
 </div>
