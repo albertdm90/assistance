@@ -3,27 +3,10 @@
 namespace App\Http\Livewire\Round;
 
 use App\Models\Round;
-use Livewire\Component;
-use Livewire\WithPagination;
+use App\Http\Livewire\LivewireComponent;
 
-class IndexComponent extends Component
+class IndexComponent extends LivewireComponent
 {
-    use WithPagination;
-
-    public $search = '';
-    public $row = 20;
-
-    protected $listeners = ['destroy'];
-
-    public function updatingSearch()
-    {
-        $this->resetPage();
-    }
-
-    public function paginationView()
-    {
-        return 'vendor.pagination.otika';
-    }
 
     public function render()
     {
@@ -34,9 +17,31 @@ class IndexComponent extends Component
             'checkpoints.cp_description', 
         )->join('workers', 'workers.id', 'rounds.wor_id')
         ->join('checkpoints', 'checkpoints.id', 'rounds.cp_id')
-        ->where('workers.wor_name', 'LIKE', "%{$this->search}%")
-        ->orWhere('workers.wor_lastname', 'LIKE', "%{$this->search}%")
-        ->orWhere('workers.wor_id_number', 'LIKE', "%{$this->search}%")
+        // ->where('workers.wor_name', 'LIKE', "%{$this->search}%")
+        // ->orWhere('workers.wor_lastname', 'LIKE', "%{$this->search}%")
+        // ->orWhere('workers.wor_id_number', 'LIKE', "%{$this->search}%")
+        ->when($this->typeSearch, function ($query, $type_search) {
+            if($type_search == 'today'){
+                return $query->whereDate('rounds.rou_date', now());
+            }
+            if($type_search == 'month'){
+                return $query->whereMonth('rounds.rou_date', now());
+            }
+            if($type_search == 'last-month'){
+                $today = date("d-m-Y");
+                $month = date("m",strtotime($today."- 1 month"));
+                $year = date("Y",strtotime($today."- 1 month"));
+                return $query->whereYear('rounds.rou_date', $year)->whereMonth('rounds.rou_date', $month);
+            }
+            if($type_search == 'year'){
+                return $query->whereYear('rounds.rou_date', now());
+            }
+        })
+        ->when($this->search, function ($query, $type_search) {
+            return $query->where('workers.wor_id_number', 'LIKE', "%{$this->search}%")
+                ->orWhere('workers.wor_name', 'LIKE', "%{$this->search}%")
+                ->orWhere('workers.wor_lastname', 'LIKE', "%{$this->search}%");
+        })
         ->orderBy('rounds.id', 'DESC')
         ->paginate($this->row);
 
@@ -55,16 +60,4 @@ class IndexComponent extends Component
             'rounds' => $rounds
         ]);
     }
-
-    public function destroy($id)
-    {
-        $round = Round::find($id);
-            if(isset($round->id))
-            $round->delete();
-        
-        $this->dispatchBrowserEvent(
-            'alert', ['type' => 'success', 'message' => 'se ha eliminado el registro.']
-        );
-    }
-
 }

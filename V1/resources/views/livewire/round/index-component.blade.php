@@ -6,11 +6,29 @@
     @if (isset($search) && isset($row))
       <div class="card-header text-right " style="display: block;">
           @include('livewire.includes.barSearch')
+          <div class="card-header-action">
+            <div class="row">
+          
+              <div class="col-sm-12">
+                <div class="form-inline">
+                  <div class="form-group">
+                    <label for="inputPassword6">Buscando por</label>
+                    <select class="form-control-sm mx-sm-3" id="inputPassword6" wire:model="typeSearch">
+                      <option value="today">Dia</option>
+                      <option value="month">Mes actual</option>
+                      <option value="last-month">Mes anterior</option>
+                      <option value="year">Año</option>
+                      <option value="all">Todos</option>
+                    </select>
+                  </div>
+                </div>
+              </div>              
+            </div>
+          </div>
       </div>
       @endif
 
     <div class="card-body">
-
       <div class="table-responsive">
         <table class="table table-sm table-bordered table-hover">
           <thead>
