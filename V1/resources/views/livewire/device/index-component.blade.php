@@ -1,11 +1,6 @@
 <div class="card card-primary">
     <div class="card-header">
         <h4>Dispositivos registrados {!! $status_register_device ? '<span class="text-success">Esperando registro</span>' : '' !!} </h4>
-        {{-- <div class="card-header-action">
-          <a href="javascript:void(0)" wire:click="destroyAll()" class="btn btn-danger btn-icon icon-right">Eliminar todos <i class="fas fa-trash"></i></a>
-          <a href="javascript:void(0)" wire:click="updateStatus()" class="btn {{ $status_register_device ? 'btn-success' : 'btn-danger'}} btn-icon icon-right">Registro de dispositivos {{ $status_register_device ? 'activo' : 'desactivado' }}</a>
-        </div> --}}
-
         <div class="card-header-action">
 
           <div class="dropdown ">

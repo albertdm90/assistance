@@ -7,6 +7,15 @@ use App\Http\Livewire\LivewireComponent;
 
 class IndexComponent extends LivewireComponent
 {
+    public $typeSearch = 'month';
+    public $date_start = '';
+    public $date_end = '';
+
+    public function mount()
+    {
+        $this->date_start = date('Y-m-d');
+        $this->date_end = date('Y-m-d');
+    }
 
     public function render()
     {
@@ -20,21 +29,35 @@ class IndexComponent extends LivewireComponent
         // ->where('workers.wor_name', 'LIKE', "%{$this->search}%")
         // ->orWhere('workers.wor_lastname', 'LIKE', "%{$this->search}%")
         // ->orWhere('workers.wor_id_number', 'LIKE', "%{$this->search}%")
-        ->when($this->typeSearch, function ($query, $type_search) {
-            if($type_search == 'today'){
+        ->when([
+            'typeSearch' => $this->typeSearch,
+            'dateStart' => $this->date_start, 
+            'dateEnd' => $this->date_end
+        ], function ($query, $data) {
+
+
+
+
+            if($data['typeSearch'] == 'today'){
                 return $query->whereDate('rounds.rou_date', now());
             }
-            if($type_search == 'month'){
+            if($data['typeSearch'] == 'month'){
                 return $query->whereMonth('rounds.rou_date', now());
             }
-            if($type_search == 'last-month'){
+            if($data['typeSearch'] == 'last-month'){
                 $today = date("d-m-Y");
                 $month = date("m",strtotime($today."- 1 month"));
                 $year = date("Y",strtotime($today."- 1 month"));
                 return $query->whereYear('rounds.rou_date', $year)->whereMonth('rounds.rou_date', $month);
             }
-            if($type_search == 'year'){
+            if($data['typeSearch'] == 'year'){
                 return $query->whereYear('rounds.rou_date', now());
+            }
+            if($data['typeSearch'] == 'date'){
+                return $query->whereBetween('rounds.rou_date', [
+                    $data['dateStart'],
+                    $data['dateEnd'],
+                ]);
             }
         })
         ->when($this->search, function ($query, $type_search) {

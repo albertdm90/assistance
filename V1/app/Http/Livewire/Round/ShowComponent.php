@@ -51,6 +51,8 @@ class ShowComponent extends Component
     {
         $round = Round::select('rounds.*', 
             'checkpoints.cp_description', 
+            'checkpoints.cp_lat', 
+            'checkpoints.cp_long', 
         )->join('workers', 'workers.id', 'rounds.wor_id')
         ->join('checkpoints', 'checkpoints.id', 'rounds.cp_id')
         ->where('rounds.id', $this->rou_id)
@@ -76,6 +78,8 @@ class ShowComponent extends Component
     {
         $rounds = Round::select('rounds.*', 
             'checkpoints.cp_description', 
+            'checkpoints.cp_lat',
+            'checkpoints.cp_long',
         )->join('workers', 'workers.id', 'rounds.wor_id')
         ->join('checkpoints', 'checkpoints.id', 'rounds.cp_id')
         ->where('workers.id', $wor_id)

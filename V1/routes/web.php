@@ -28,7 +28,11 @@ Auth::routes();
 Route::group(['middleware' => ['auth:sanctum', 'verified']], function () {
         
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::view('/device', 'device.index')->name('device.index');
+    Route::get('/device/{search?}', function ($search = '') {
+        return view('device.index', [
+            'search' => $search
+        ]);
+    })->name('device.index');
     
     Route::prefix('/position')->group(function () {
         Route::view('/', 'position.index')->name('position.index');

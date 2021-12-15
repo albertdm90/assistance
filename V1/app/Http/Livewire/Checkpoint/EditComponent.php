@@ -17,10 +17,13 @@ class EditComponent extends Component
     protected $rules = [
         'cp_description' => 'required',
         'cp_status' => 'required',
+        'cp_lat' => 'nullable|numeric|between:-90,90',
+        'cp_long' => 'nullable|numeric|between:-90,90',
     ];
 
     protected $messages = [
-        'required' => 'Requerido'
+        'required' => 'Requerido',
+        'numeric' => 'Ingrese la coordenada correcta'
     ];
 
     public function mount()
@@ -30,6 +33,8 @@ class EditComponent extends Component
             $this->cp_description = $this->checkpoint->cp_description;
             $this->cp_status = $this->checkpoint->cp_status;
             $this->cp_code = $this->checkpoint->cp_code;
+            $this->cp_lat = $this->checkpoint->cp_lat;
+            $this->cp_long = $this->checkpoint->cp_long;
         }
     }
 
@@ -44,6 +49,8 @@ class EditComponent extends Component
 
         $this->checkpoint->update([
             'cp_description' => $this->cp_description,
+            'cp_lat' => $this->cp_lat,
+            'cp_long' => $this->cp_long,
             'cp_status' => $this->cp_status,
         ]);
 
@@ -51,12 +58,6 @@ class EditComponent extends Component
             'messageToastr', [
                 'type' => 'success', 
                 'message' => 'Se ha guardado con éxito.'
-            ]
-        );
-
-        $this->dispatchBrowserEvent(
-            'redirect', [
-                'url' => route('checkpoint.edit', $this->checkpoint->id), 
             ]
         );
     }

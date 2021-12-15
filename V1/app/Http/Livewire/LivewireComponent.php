@@ -11,7 +11,6 @@ class LivewireComponent extends Component
 
     public $search = '';
     public $row = 20;
-    public $typeSearch = 'today';
 
     protected $listeners = ['destroy'];
 
