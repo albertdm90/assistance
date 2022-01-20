@@ -10,6 +10,7 @@ class IndexComponent extends LivewireComponent
     public $typeSearch = 'month';
     public $date_start = '';
     public $date_end = '';
+    public $status = '';
 
     public function mount()
     {
@@ -34,9 +35,6 @@ class IndexComponent extends LivewireComponent
             'dateStart' => $this->date_start, 
             'dateEnd' => $this->date_end
         ], function ($query, $data) {
-
-
-
 
             if($data['typeSearch'] == 'today'){
                 return $query->whereDate('rounds.rou_date', now());
@@ -65,6 +63,13 @@ class IndexComponent extends LivewireComponent
                 ->orWhere('workers.wor_name', 'LIKE', "%{$this->search}%")
                 ->orWhere('workers.wor_lastname', 'LIKE', "%{$this->search}%");
         })
+        ->when($this->status, function ($query, $status) {
+            if($status == 1) {
+                return $query->where('rounds.rou_status', '>', 0);
+            }else{
+                return $query->where('rounds.rou_status', 0);
+            }
+        })
         ->orderBy('rounds.id', 'DESC')
         ->paginate($this->row);
 
@@ -75,8 +80,8 @@ class IndexComponent extends LivewireComponent
             $round->worker = "$round->wor_id_number - $round->wor_name $round->wor_lastname";
             $round->checkpoint = "$round->cp_description";
             $round->status = $round->rou_status == 0 
-            ? '<button class="btn btn-icon btn-warning" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro fuera del horario del empleado" data-original-title="Atención"><i class="fas fa-times"></i></button>'
-            : '<button class="btn btn-icon btn-success" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro creado en horario del empleado" data-original-title="Atención"><i class="fas fa-check"></i></button>';
+            ? '<button class="btn btn-icon btn-warning btn-action m-r-2" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro fuera del horario del empleado" data-original-title="Atención"><i class="fas fa-times"></i></button>'
+            : '<button class="btn btn-icon btn-success btn-action m-r-2" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro creado en horario del empleado" data-original-title="Atención"><i class="fas fa-check"></i></button>';
         });
 
         return view('livewire.round.index-component',[

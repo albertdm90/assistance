@@ -9,7 +9,7 @@
             </button>
             <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
               <a class="dropdown-item has-icon text-danger" href="javascript:void(0)" wire:click="destroyAll()"><i class="fas fa-trash"></i> Eliminar todos</a>
-              <a class="dropdown-item has-icon {{ $status_register_device ? 'text-success' : 'text-danger'}}" href="javascript:void(0)" wire:click="updateStatus()">
+              <a class="dropdown-item has-icon {{ $status_register_device ? 'text-danger' : 'text-success'}}" href="javascript:void(0)" wire:click="updateStatus()">
                 @if ($status_register_device)
                   <i class="fas fa-check"></i> 
                   Registro activado

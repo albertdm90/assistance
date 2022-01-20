@@ -28,6 +28,15 @@
             <input type="date" id="dateEnd" class="form-control mx-sm-1" aria-describedby="passwordHelpInline" wire:model="date_end">
           </div>
         @endif
+
+        <div class="form-group">
+          <label for="status">Estatus</label>
+          <select class="form-control mx-sm-1" id="status" wire:model="status">
+            <option value="">Todos</option>
+            <option value="1">Dentro del horario</option>
+            <option value="2">Fuera del horario</option>
+          </select>
+        </div>
       </div>
     </div>
   </div>
@@ -52,7 +61,7 @@
                 <th scope="col" width="20%">Trabajador</th>
                 <th scope="col" width="20%">Lugar</th>
                 <th scope="col" colspan="2" width="25%">Fecha y hora de la rondas</th>
-                <th scope="col" width="15%">Acciones</th>
+                <th scope="col" width="18%">Acciones</th>
               </tr>
             </thead>
             <tbody>
@@ -69,22 +78,20 @@
                   
                 </td>
                 <td>{!! $round->worker !!}</td>
-                <td>
-                  @if (isset($round->rou_lat) && isset($round->rou_long))    
-                    <a href="{{ route('maps', ['lat' => $round->rou_lat, 'long' => $round->rou_long]) }}" target="blank" class="btn btn-sm btn-primary">
-                      <i class="fas fa-map-marker"></i>
-                    </a>
-                  @endif
-  
-                  
+                <td>                  
                   {{ $round->checkpoint }}
              
                 </td>
                 <td width="50px">{{ $round->date }}</td>
                 <td width="100px">{{ $round->hour }}</td>
                 <td width="150px" class="text-right">
+                  @if (isset($round->rou_lat) && isset($round->rou_long))    
+                    <a href="{{ route('maps', ['lat' => $round->rou_lat, 'long' => $round->rou_long]) }}" target="blank" class="btn btn-icon btn-primary btn-action m-r-2">
+                      <i class="fas fa-map-marker"></i>
+                    </a>
+                  @endif
                   {!! $round->status !!}
-                  <a class="btn btn-icon btn-info btn-action m-r-5" href="{{ route('round.show', $round->id) }}">
+                  <a class="btn btn-icon btn-info btn-action m-r-2" href="{{ route('round.show', $round->id) }}">
                     <i class="fas fa-eye"></i>
                   </a>
                   {{-- <a class="btn btn-icon btn-danger btn-action" href="javascript:void(0)" wire:click="$emit('delete', {{ $round->id }}, 'round.index-component', 'destroy')"><i class="fas fa-trash"></i></a> --}}
