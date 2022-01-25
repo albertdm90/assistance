@@ -31,4 +31,13 @@ export class RegisterService {
       })
     );
   }
+
+  updateWorkersPinList(){
+    const cod_uuid = localStorage.getItem('cod_uuid');
+    return this.httpClient.get(`${endpoint}/workers/pin/list/${cod_uuid}`, this.httpOptions)
+      .pipe(map( (res:any) => {
+        return res;
+      })
+    );
+  }
 }

@@ -35,6 +35,7 @@ export class DevicePage implements OnInit {
     
     this.registerService.storeDevice(data).subscribe(res =>  {
       if(res.message === 'Success'){
+        localStorage.setItem('workers_pin_list', JSON.stringify(res.worker_pin_list));
         this.router.navigateByUrl('/');
         this.presentToast('success', 'Registro de dispositivo exitoso');
       }else{
@@ -42,8 +43,20 @@ export class DevicePage implements OnInit {
       }
     }, err => {
       console.log(err)
-      this.presentToast('danger', err.message);
+      this.presentToast('danger', 'Error. Este dispositivo se encuentra registrado o no tiene permisos para registrar');
     });
+  }
+
+  async update()
+  {
+    this.registerService.updateWorkersPinList().subscribe(res => {
+      localStorage.setItem('workers_pin_list', JSON.stringify(res));
+      this.router.navigateByUrl('/');
+      this.presentToast('success', 'Actualización exitoso');
+    }, err => {
+      console.log(err)
+      this.presentToast('danger', 'Error en actualizar');
+    })
   }
 
   async presentToast(color, message) {

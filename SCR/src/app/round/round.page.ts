@@ -63,14 +63,25 @@ export class RoundPage implements OnInit {
     let send:boolean = true;
     let rounds:any = JSON.parse(localStorage.getItem('rounds'));
     let roundsCount:any = JSON.parse(localStorage.getItem('roundsCount'));
+    const workers_pin_list:any = JSON.parse(localStorage.getItem('workers_pin_list'));
     
     if(this.wor_pin ==  null || this.wor_pin ==  ''){
       send = false;
       this.presentToast('danger', 'Ingrese PIN');
     }
 
+    console.log(workers_pin_list)
+
+    if(! workers_pin_list.data.includes(this.wor_pin)){
+      send = false;
+      this.presentToast('danger', 'PIN incorrecto');
+    }
+
+
     const coordinates = await Geolocation.getCurrentPosition();
     console.log('Current', coordinates.coords.longitude);
+
+
 
     if(send){
       let date = new Date();
