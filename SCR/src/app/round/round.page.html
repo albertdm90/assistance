@@ -20,7 +20,7 @@
             <h1>
               <ion-icon name="hardware-chip-outline" slot="end"></ion-icon>
             </h1>
-            <ion-button *ngIf="statusConnected" fill="outline" slot="end" ion-button (click)="scaner()">Escanear</ion-button>
+            <!-- <ion-button *ngIf="statusConnected" fill="outline" slot="end" ion-button (click)="scaner()">Escanear</ion-button> -->
           </ion-item>
         
           <ion-card-content>
@@ -30,7 +30,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <!-- <ion-row>
       <ion-col>
         <ion-list>
           <ion-item *ngFor="let checkpoint of checkpoints">
@@ -39,7 +39,7 @@
           </ion-item>
         </ion-list>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row *ngIf="status">
       <ion-col>
@@ -53,7 +53,7 @@
               <ion-col size="12" class="m-t-5">
                 <ion-item>
                   <ion-label position="floating">PIN</ion-label>
-                  <ion-input inputmode="numeric" pattern="[0-9]*" max="6" min="4" [(ngModel)]="wor_pin" name="wor_pin"></ion-input>
+                  <ion-input inputmode="tel" pattern="[0-9]*" max="6" min="4" [(ngModel)]="wor_pin" name="wor_pin" style="-webkit-text-security:disc"></ion-input>
                 </ion-item>
                 <!-- <ion-input type="password" class="text-center" placeholder="Ingrese su pin"></ion-input> -->
               </ion-col>

@@ -3,9 +3,9 @@ import { ToastController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { RoundService } from './../services/round.service';
 import { Plugins } from '@capacitor/core';
+import { NFC, Ndef } from '@awesome-cordova-plugins/nfc/ngx';
 
-const { Geolocation } = Plugins;
-const { Network } = Plugins;
+const { Geolocation, Network, Keyboard } = Plugins;
 
 @Component({
   selector: 'app-round',
@@ -21,43 +21,55 @@ export class RoundPage implements OnInit {
   lat:string = '';
   lon:string = '';
   statusConnected:boolean = false;
+  
 
   constructor(
     public toastController: ToastController,
     private router: Router,
     private roundService: RoundService,
+    private nfc: NFC,
+    private ndef: Ndef
   ) { }
 
   async ngOnInit() {
-    this.checkpoints = JSON.parse(localStorage.getItem('ckeckpoints'));
     let status2 = await Network.getStatus();
     this.statusConnected = status2.connected;
-    this.timeStore();
+    this.readerNFC();
+    this.status = false;
   }
 
-  timeStore()
+  readerNFC()
   {
-    setTimeout(() =>{
+    let flags = this.nfc.FLAG_READER_NFC_A | this.nfc.FLAG_READER_NFC_V
+    
+    
+    const readerMode$ = this.nfc.readerMode(flags).subscribe(
+      tag => {
+        console.log(this.nfc.bytesToHexString(tag.id));
+
+        this.cp_code = this.nfc.bytesToHexString(tag.id);
+        this.status = true;
+        this.presentToast('warning', this.nfc.bytesToHexString(tag.id));     
+        console.log('Finalizado')
+        this.timeStore()
+      },
+      err => {
+        console.log('Error reading tag', err)
+        this.presentToast('danger', 'Error en el chip NFC');
+        this.router.navigateByUrl('/');
+      }
+    );
+
+
+  }
+
+  async timeStore()
+  {
+    await setTimeout(() =>{
+      console.log('esperando')
       this.router.navigateByUrl('/');
-    }, 30000);
+    }, 90000);
   }
-
-  scaner()
-  {
-    this.roundService.indexCheckPoints().subscribe(res =>  {
-      this.checkpoints = res;
-      localStorage.setItem('ckeckpoints', JSON.stringify(res));
-    });
-  }
-
-  select(code)
-  {
-    console.log(code)
-    this.cp_code = code;
-    this.checkpoints = [];
-    this.status = true;
-  }
-
 
   async submitForm(){
     let send:boolean = true;
@@ -70,7 +82,7 @@ export class RoundPage implements OnInit {
       this.presentToast('danger', 'Ingrese PIN');
     }
 
-    console.log(workers_pin_list)
+    // console.log(workers_pin_list)
 
     if(! workers_pin_list.data.includes(this.wor_pin)){
       send = false;
@@ -79,7 +91,7 @@ export class RoundPage implements OnInit {
 
 
     const coordinates = await Geolocation.getCurrentPosition();
-    console.log('Current', coordinates.coords.longitude);
+    // console.log('Current', coordinates.coords.longitude);
 
 
 
@@ -110,6 +122,9 @@ export class RoundPage implements OnInit {
       this.presentToast('success', 'Registro creado');
       this.router.navigate(['/']);
       this.cp_code = '';
+      this.status = false;
+      this.wor_pin = '';
+      this.cp_code = '';
     }
 
     
@@ -119,7 +134,8 @@ export class RoundPage implements OnInit {
       message,
       position: 'bottom',
       color,
-      duration: 2000
+      duration: 9000,
+      cssClass: 'center'
     });
     toast.present();
   }

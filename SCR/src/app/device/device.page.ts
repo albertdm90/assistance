@@ -64,7 +64,8 @@ export class DevicePage implements OnInit {
       message,
       position: 'bottom',
       color,
-      duration: 5000
+      duration: 5000,
+      cssClass: 'center'
     });
     toast.present();
   }

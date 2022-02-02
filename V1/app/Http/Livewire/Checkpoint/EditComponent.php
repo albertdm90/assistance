@@ -12,18 +12,12 @@ class EditComponent extends Component
     $cp_lat = '',
     $cp_long = '',
     $cp_code = '',
-    $cp_id = '';
-
-    protected $rules = [
-        'cp_description' => 'required',
-        'cp_status' => 'required',
-        'cp_lat' => 'nullable|numeric|between:-90,90',
-        'cp_long' => 'nullable|numeric|between:-90,90',
-    ];
+    $cp_id = 0;
 
     protected $messages = [
         'required' => 'Requerido',
-        'numeric' => 'Ingrese la coordenada correcta'
+        'numeric' => 'Ingrese la coordenada correcta',
+        'unique' => 'Ya esta registrado',
     ];
 
     public function mount()
@@ -45,10 +39,17 @@ class EditComponent extends Component
 
     public function update()
     {
-        $this->validate();
+        $this->validate([
+            'cp_description' => 'required',
+            'cp_code' => 'required|unique:checkpoints,cp_code,'.$this->cp_id,
+            'cp_status' => 'required',
+            'cp_lat' => 'nullable|numeric|between:-90,90',
+            'cp_long' => 'nullable|numeric|between:-90,90',
+        ]);
 
         $this->checkpoint->update([
             'cp_description' => $this->cp_description,
+            'cp_code' => $this->cp_code,
             'cp_lat' => $this->cp_lat,
             'cp_long' => $this->cp_long,
             'cp_status' => $this->cp_status,

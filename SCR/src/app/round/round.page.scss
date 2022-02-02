@@ -6,3 +6,13 @@
   top: 40%;
   transform: translateY(-50%);
 }
+
+
+@media screen {
+  ion-toast.toast-custom-class {
+    --border-radius: 30px !important;
+    --text-align: center !important;
+    --background-color: #676767 !important;
+    text-align: center;
+  }
+}
