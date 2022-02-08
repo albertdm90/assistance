@@ -44,6 +44,15 @@
                   {{ $worker->wor_id_number }}
                 </span>
               </p>
+
+              <p class="clearfix">
+                <span class="float-left">
+                  Código PIN
+                </span>
+                <span class="float-right text-muted">
+                  {{ $worker->wor_pin }}
+                </span>
+              </p>
   
               <p class="clearfix">
                 <span class="float-left">

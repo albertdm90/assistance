@@ -33,6 +33,7 @@
               <th scope="col">#</th>
               <th scope="col">Identificación</th>
               <th scope="col">Empleado</th>
+              <th scope="col">PIN</th>
               <th scope="col" class="text-center">Estatus</th>
               <th scope="col">Fecha de creación</th>
               <th scope="col">Acciones</th>
@@ -48,6 +49,9 @@
                 </td>
                 <td>
                   {{ $worker->wor_name .' '. $worker->wor_lastname }}
+                </td>
+                <td>
+                  {{ $worker->wor_pin }}
                 </td>
                 <td class="text-center">
                   @switch($worker->wor_status)

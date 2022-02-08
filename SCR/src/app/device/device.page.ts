@@ -51,6 +51,7 @@ export class DevicePage implements OnInit {
   {
     this.registerService.updateWorkersPinList().subscribe(res => {
       localStorage.setItem('workers_pin_list', JSON.stringify(res));
+      console.log(res)
       this.router.navigateByUrl('/');
       this.presentToast('success', 'Actualización exitoso');
     }, err => {

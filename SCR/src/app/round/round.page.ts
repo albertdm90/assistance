@@ -50,7 +50,6 @@ export class RoundPage implements OnInit {
         this.cp_code = this.nfc.bytesToHexString(tag.id);
         this.status = true;
         this.presentToast('warning', this.nfc.bytesToHexString(tag.id));     
-        console.log('Finalizado')
         this.timeStore()
       },
       err => {

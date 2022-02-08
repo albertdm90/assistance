@@ -29,13 +29,13 @@ export class AppComponent {
     let status = await Network.getStatus();
 
     if(rounds != null){
-      rounds.map(round => {
-        if(status.connected) {
+      if(status.connected) {
+        rounds.map(round => {
           this.roundService.storeRound(round).subscribe(res =>  {
             console.log(res);
           });
-        }
-      });
+        });
+      }
       localStorage.setItem('rounds', null);
       localStorage.setItem('roundsCount', '0');
     }
