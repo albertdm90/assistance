@@ -45,7 +45,8 @@ export class RoundPage implements OnInit {
     
     const readerMode$ = this.nfc.readerMode(flags).subscribe(
       tag => {
-        console.log(this.nfc.bytesToHexString(tag.id));
+        // console.log(this.nfc.bytesToHexString(tag.id));
+        // console.log(tag);
 
         this.cp_code = this.nfc.bytesToHexString(tag.id);
         this.status = true;

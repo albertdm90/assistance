@@ -31,7 +31,7 @@ class CreateComponent extends Component
 
     public function render()
     {
-        $this->cp_code = Str::slug($this->cp_description, '_');
+        // $this->cp_code = Str::slug($this->cp_description, '_');
         return view('livewire.checkpoint.create-component');
     }
 
@@ -40,7 +40,7 @@ class CreateComponent extends Component
         $this->validate();
         $checkpoint = Checkpoint::create([
             'cp_description' => $this->cp_description,
-            'cp_code' => $this->cp_code,
+            'cp_code' => Str::lower($this->cp_code),
             'cp_lat' => $this->cp_lat,
             'cp_long' => $this->cp_long,
             'cp_status' => $this->cp_status,

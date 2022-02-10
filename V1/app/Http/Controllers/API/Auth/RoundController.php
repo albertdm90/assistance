@@ -9,6 +9,7 @@ use App\Models\Round;
 use App\Models\Worker;
 use App\Models\WorkSchedule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class RoundController extends Controller
 {
@@ -32,7 +33,7 @@ class RoundController extends Controller
         $device = Device::where('cod_uuid', $request->cod_uuid)->count();
         $worker = Worker::where('wor_pin', $request->wor_pin)->first();
         
-        $checkpoint = Checkpoint::where('cp_code', $request->cp_code)->first();
+        $checkpoint = Checkpoint::where('cp_code', Str::lower($request->cp_code))->first();
 
         if(!isset($worker->id) || !isset($checkpoint->id) || $device == 0)    
             return response()->json([

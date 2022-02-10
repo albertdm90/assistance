@@ -6,7 +6,7 @@
 
 <div class="form-group">
   <label>Código para etiqueta</label>
-  <input type="text" class="form-control{{ $errors->has('cp_code') ? ' is-invalid' : '' }}" wire:model="cp_code" name="cp_code">
+  <input type="text" class="form-control{{ $errors->has('cp_code') ? ' is-invalid' : '' }}" wire:model="cp_code" name="cp_code" {{ isset($cp_id) ? 'readonly' : '' }}>
   @error('cp_code') <div class="invalid-feedback">{{ $message }}</div>@enderror
 </div>
 
