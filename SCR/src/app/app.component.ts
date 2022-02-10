@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RoundService } from './services/round.service';
 import { Plugins } from '@capacitor/core';
+import { RegisterService } from './services/register.service';
 
 const { Network } = Plugins;
 
@@ -12,11 +13,13 @@ const { Network } = Plugins;
 export class AppComponent {
   constructor(
     private roundService: RoundService,
+    private registerService: RegisterService
   ) {}
 
   ngOnInit() {
     setInterval(() => {
       this.storeRound();
+      this.updatePin();
     }, 9000);
     // this.storeRound();
   }
@@ -33,11 +36,19 @@ export class AppComponent {
         rounds.map(round => {
           this.roundService.storeRound(round).subscribe(res =>  {
             console.log(res);
+            localStorage.setItem('rounds', null);
+            localStorage.setItem('roundsCount', '0');
           });
         });
       }
-      localStorage.setItem('rounds', null);
-      localStorage.setItem('roundsCount', '0');
     }
   }
+
+ async updatePin ()
+ {
+  this.registerService.updateWorkersPinList().subscribe(res => {
+    localStorage.setItem('workers_pin_list', JSON.stringify(res));
+    console.log('Update PIN')
+  });
+ }
 }

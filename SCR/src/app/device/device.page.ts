@@ -53,7 +53,7 @@ export class DevicePage implements OnInit {
       localStorage.setItem('workers_pin_list', JSON.stringify(res));
       console.log(res)
       this.router.navigateByUrl('/');
-      this.presentToast('success', 'Actualización exitoso');
+      this.presentToast('success', 'Actualización exitosa');
     }, err => {
       console.log(err)
       this.presentToast('danger', 'Error en actualizar');

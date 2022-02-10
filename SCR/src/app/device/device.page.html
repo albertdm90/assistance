@@ -13,33 +13,33 @@
 
   <ion-grid>
     <ion-row>
+      
       <ion-col>
         <ion-card>
-          <ion-item>
-            <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
-            <ion-button fill="outline" slot="end" (click)="storage()">Registrar</ion-button>
-          </ion-item>
+        
+         
         
           <ion-card-content>
-            Recuerde que debe tener la opcion de "<strong>Regisrar dispositivo activa</strong>" en la Aplicación web
+            <div class="ion-text-center">
+              <h3>
+                <ion-button fill="outline" (click)="storage()">Registrar</ion-button>
+              </h3>
+              <!-- <ion-text color="primary">
+                <h2>H2: The quick brown fox jumps over the lazy dog</h2>
+              </ion-text> -->
+              Recuerde que debe tener la opcion de "<ion-text color="success"><b>Regisrar dispositivo activa</b></ion-text>" en la Aplicación web
+            </div>
           </ion-card-content>
         </ion-card>
-      </ion-col>
-      <ion-col>
-        <ion-card>
-          <ion-item>
-            <ion-icon name="phone-portrait-outline" slot="start"></ion-icon>
-            <ion-button fill="outline" slot="end" (click)="update()">Actualizar</ion-button>
-          </ion-item>
+
         
-          <ion-card-content>
-            Actualiza el registro guardado de los Pin registrados en el dispositivo
-          </ion-card-content>
-        </ion-card>
       </ion-col>
     </ion-row>
-  
+    
   </ion-grid>
+
+
 
 </div>
 </ion-content>
+
