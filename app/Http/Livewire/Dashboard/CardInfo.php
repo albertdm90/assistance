@@ -59,9 +59,12 @@ class CardInfo extends Component
     public function checkpointsCount()
     {
         $data['total'] = Checkpoint::count();
-        $active = Checkpoint::where('cp_status', 1)->count();
-        $data['active'] = $active*100/$data['total'];
-        $data['active'] = round($data['active'], 2);
+        $data['active'] = 0;
+        if($data['total'] > 0){
+            $active = Checkpoint::where('cp_status', 1)->count();
+            $data['active'] = $active*100/$data['total'];
+            $data['active'] = round($data['active'], 2);
+        }
         return $data;
     }
 
@@ -69,8 +72,10 @@ class CardInfo extends Component
     {
         $data['total'] = Worker::count();
         $active = Worker::where('wor_status', 1)->count();
-        $data['active'] = $active*100/$data['total'];
-        $data['active'] = round($data['active'], 2);
+        if( $data['total'] > 0){
+            $data['active'] = $active*100/$data['total'];
+            $data['active'] = round($data['active'], 2);
+        }
         return $data;
     }
 
