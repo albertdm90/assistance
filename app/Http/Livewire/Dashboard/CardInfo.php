@@ -72,6 +72,7 @@ class CardInfo extends Component
     {
         $data['total'] = Worker::count();
         $active = Worker::where('wor_status', 1)->count();
+        $data['active'] = 0;
         if( $data['total'] > 0){
             $data['active'] = $active*100/$data['total'];
             $data['active'] = round($data['active'], 2);
