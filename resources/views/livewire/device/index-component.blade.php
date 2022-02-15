@@ -12,10 +12,10 @@
               <a class="dropdown-item has-icon {{ $status_register_device ? 'text-danger' : 'text-success'}}" href="javascript:void(0)" wire:click="updateStatus()">
                 @if ($status_register_device)
                   <i class="fas fa-check"></i> 
-                  Registro activado
-                @else
+                  Desactivar registro
+                  @else
                   <i class="fas fa-times"></i> 
-                  Registro desactivado
+                  Activar registro
                 @endif
               </a>
             </div>

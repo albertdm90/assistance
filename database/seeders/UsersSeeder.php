@@ -33,8 +33,8 @@ class UsersSeeder extends Seeder
 
         $user = User::create([
             'name' => 'Admin',
-            'email' => 'admin@secret.com',
-            'password' => Hash::make('admin159*'),
+            'email' => 'santorinibdu.com.ve@gmail.com',
+            'password' => Hash::make('j0s3m4rTH4@'),
             'email_verified_at' => date('Y-m-d. h:i:s')
         ]);
 
