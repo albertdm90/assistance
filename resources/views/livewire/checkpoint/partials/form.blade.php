@@ -11,21 +11,26 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     <div class="form-group">
       <label>Latitud</label>
-      <input type="text" class="form-control{{ $errors->has('cp_lat') ? ' is-invalid' : '' }}" wire:model="cp_lat" name="cp_lat">
+      <input type="text" class="form-control{{ $errors->has('cp_lat') ? ' is-invalid' : '' }}" wire:model="cp_lat" name="cp_lat" id="cp_lat">
       @error('cp_lat') <div class="invalid-feedback">{{ $message }}</div>@enderror
     </div>
     
     <div class="form-group">
       <label>Longitud</label>
-      <input type="text" class="form-control{{ $errors->has('cp_long') ? ' is-invalid' : '' }}" wire:model="cp_long" name="cp_long">
+      <input type="text" class="form-control{{ $errors->has('cp_long') ? ' is-invalid' : '' }}" wire:model="cp_long" name="cp_long" id="cp_long">
       @error('cp_long') <div class="invalid-feedback">{{ $message }}</div>@enderror
     </div>
+
+    <div class="form-group">
+      <button wire:click="getLocation()" type="button" class="btn btn-dark btn-sm">Obtener ubicación</button>
+    </div>
+
   </div>
 
-  <div class="col-sm-6">
+  <div class="col-sm-8">
     <iframe src="{{ 'http://maps.google.com/maps?q='.$cp_lat.','.$cp_long.'&z=15&output=embed'}}" style="width:100%; height:25vh"></iframe>
   </div>
 </div>

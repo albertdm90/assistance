@@ -8,3 +8,21 @@
 </div>
 @endsection
 
+@push('js')
+  <script>
+
+window.addEventListener('getLocation', event => { 
+  navigator.geolocation ? navigator.geolocation.getCurrentPosition(showPosition) : 
+  iziToast.error({
+    message: 'La geolocalización no es compatible con este navegador.',
+    position: 'topRight'
+  });
+  
+  function showPosition(position) {
+    Livewire.emitTo('checkpoint.edit-component', 'showLatLong', position.coords.latitude, position.coords.longitude);
+  }
+})
+
+  </script>
+@endpush
+

@@ -14,6 +14,9 @@ class CreateComponent extends Component
     $cp_long = '', 
     $cp_code = '';
 
+    protected $listeners = ['showLatLong'];
+    
+
     protected $rules = [
         'cp_description' => 'required',
         'cp_code' => 'required|unique:checkpoints,cp_code',
@@ -58,5 +61,18 @@ class CreateComponent extends Component
                 'url' => route('checkpoint.edit', $checkpoint->id), 
             ]
         );
+    }
+
+    public function getLocation()
+    {
+        $this->dispatchBrowserEvent(
+            'getLocation'
+        );
+    }
+
+    public function showLatLong($lat, $long)
+    {
+        $this->cp_lat = $lat;
+        $this->cp_long = $long;
     }
 }

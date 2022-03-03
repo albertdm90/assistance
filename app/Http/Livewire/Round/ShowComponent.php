@@ -63,8 +63,21 @@ class ShowComponent extends Component
         $round->hour = date('h:i A', strtotime($round->rou_time));
 
         $round->status = $round->rou_status == 0 
-            ? '<span class="text-warning">La ronda no se realizó dentro del horario <i class="fas fa-times"></i></span>'
-            : '<span class="text-success">La ronda se realizó dentro del horario <i class="fas fa-check"></i></span>';
+            ? '<span class=""><i class="fas fa-times text-danger"></i>&nbsp;La ronda no se realizó dentro del horario</span>'
+            : '<span class="text-black"><i class="fas fa-check text-success"></i> La ronda se realizó dentro del horario</span>';
+
+            $msjDdistance = '<span class="text-muted"><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;No existe un registro de geolocalización</span>';
+
+            if($round->rou_lat != '' && $round->cp_lat != ''){
+                $distance = $this->calculateDistance($round->rou_lat, $round->rou_long, $round->cp_lat, $round->cp_long, 'K');
+                if($distance > 30){
+                    $msjDdistance = '<span class=""><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;Se realizó a una distancia de '.$distance.' m del punto de control</span>';
+                }else
+                {
+                    $msjDdistance = '<span class=""><i class="fas fa-check text-danger"></i>&nbsp;Se realizó a una distancia de '.$distance.' m. del punto de control</span>';
+                }
+            }
+        $round->distance = $msjDdistance;
 
         return $round;
     }
@@ -146,5 +159,16 @@ class ShowComponent extends Component
     public function goBack()
     {
         return redirect($this->route);
+    }
+
+    public function calculateDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+
+        return round(($miles * 1.609344) * 1000, 2) ;   
     }
 }

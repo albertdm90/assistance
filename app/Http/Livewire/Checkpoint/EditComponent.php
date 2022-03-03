@@ -14,6 +14,8 @@ class EditComponent extends Component
     $cp_code = '',
     $cp_id = 0;
 
+    protected $listeners = ['showLatLong'];
+
     protected $messages = [
         'required' => 'Requerido',
         'numeric' => 'Ingrese la coordenada correcta',
@@ -61,5 +63,18 @@ class EditComponent extends Component
                 'message' => 'Se ha guardado con éxito.'
             ]
         );
+    }
+
+    public function getLocation()
+    {
+        $this->dispatchBrowserEvent(
+            'getLocation'
+        );
+    }
+
+    public function showLatLong($lat, $long)
+    {
+        $this->cp_lat = $lat;
+        $this->cp_long = $long;
     }
 }

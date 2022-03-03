@@ -5,6 +5,7 @@
       <p class="clearfix"><span class="float-left">Hora</span><span class="float-right text-muted">{{ $round->hour }}</span></p>
       <p class="clearfix"><span class="float-left">Estatus</span><span class="float-right text-muted">{!! $round->status !!}</span></p>
       <p class="clearfix"><span class="float-left">Punto de control</span><span class="float-right text-muted">{{ $round->cp_description }}</span></p>
+      <p class="clearfix"><span class="float-left">Distancia</span><span class="float-right text-muted">{!! $round->distance !!}</span></p>
      <div class="row">
          <div class="col-sm-6">
             <p class="clearfix"><span class="float-left">Ubicación del punto de control</span>

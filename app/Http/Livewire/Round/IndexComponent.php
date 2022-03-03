@@ -25,6 +25,8 @@ class IndexComponent extends LivewireComponent
             'workers.wor_lastname', 
             'workers.wor_id_number', 
             'checkpoints.cp_description', 
+            'checkpoints.cp_lat', 
+            'checkpoints.cp_long', 
         )->join('workers', 'workers.id', 'rounds.wor_id')
         ->join('checkpoints', 'checkpoints.id', 'rounds.cp_id')
         // ->where('workers.wor_name', 'LIKE', "%{$this->search}%")
@@ -80,12 +82,35 @@ class IndexComponent extends LivewireComponent
             $round->worker = "$round->wor_id_number - $round->wor_name $round->wor_lastname";
             $round->checkpoint = "$round->cp_description";
             $round->status = $round->rou_status == 0 
-            ? '<button class="btn btn-icon btn-warning btn-action m-r-2" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro fuera del horario del empleado" data-original-title="Atención"><i class="fas fa-times"></i></button>'
-            : '<button class="btn btn-icon btn-success btn-action m-r-2" role="button" data-toggle="popover" data-trigger="focus" title="" data-content="Registro creado en horario del empleado" data-original-title="Atención"><i class="fas fa-check"></i></button>';
-        });
+            ? '<span class=""><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;Ronda realizada fuera del horario</span>'
+            : '<span class=""><i class="fas fa-check text-success"></i>&nbsp;Ronda realizada dentro del horario</span>';
 
+            $msjDdistance = '<span class="text-muted"><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;No existe un registro de geolocalización</span>';
+
+            if($round->rou_lat != '' && $round->cp_lat != ''){
+                $distance = $this->calculateDistance($round->rou_lat, $round->rou_long, $round->cp_lat, $round->cp_long, 'K');
+                if($distance > 30){
+                    $msjDdistance = '<span class=""><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;Se realizó a una distancia de '.$distance.' m del punto de control.</span>';
+                }else
+                {
+                    $msjDdistance = '<span class=""><i class="fas fa-check text-danger"></i>&nbsp;Se realizó a una distancia de '.$distance.' m. del punto de control.</span>';
+                }
+            }
+            $round->distance = $msjDdistance;
+        });
         return view('livewire.round.index-component',[
             'rounds' => $rounds
         ]);
+    }
+
+    public function calculateDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1)) * sin(deg2rad($lat2)) +  cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta));
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+        $miles = $dist * 60 * 1.1515;
+
+        return round(($miles * 1.609344) * 1000, 2) ;   
     }
 }
