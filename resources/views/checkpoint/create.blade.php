@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row clearfix justify-content-center">
-  <div class="col-8">
+  <div class="col-sm-8">
     @livewire('checkpoint.create-component')
   </div>
 </div>
