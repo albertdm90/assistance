@@ -89,11 +89,11 @@ class IndexComponent extends LivewireComponent
 
             if($round->rou_lat != '' && $round->cp_lat != ''){
                 $distance = $this->calculateDistance($round->rou_lat, $round->rou_long, $round->cp_lat, $round->cp_long, 'K');
-                if($distance > 30){
-                    $msjDdistance = '<span class=""><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;Se realizó a una distancia de '.$distance.' m del punto de control.</span>';
+                if($distance > 100){ 
+                    $msjDdistance = '<span class=" "><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;Se realizó a una distancia de '.$distance.' m del punto de control.</span>';
                 }else
                 {
-                    $msjDdistance = '<span class=""><i class="fas fa-check text-danger"></i>&nbsp;Se realizó a una distancia de '.$distance.' m. del punto de control.</span>';
+                    $msjDdistance = '<span class=" "><i class="fas fa-check text-danger"></i>&nbsp;Se realizó a una distancia de '.$distance.' m. del punto de control.</span>';
                 }
             }
             $round->distance = $msjDdistance;

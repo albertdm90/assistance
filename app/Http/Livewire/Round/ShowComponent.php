@@ -70,7 +70,7 @@ class ShowComponent extends Component
 
             if($round->rou_lat != '' && $round->cp_lat != ''){
                 $distance = $this->calculateDistance($round->rou_lat, $round->rou_long, $round->cp_lat, $round->cp_long, 'K');
-                if($distance > 30){
+                if($distance > 100){
                     $msjDdistance = '<span class=""><i class="fas fa-times text-danger"></i>&nbsp;&nbsp;Se realizó a una distancia de '.$distance.' m del punto de control</span>';
                 }else
                 {
