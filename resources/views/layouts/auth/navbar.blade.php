@@ -17,14 +17,8 @@
           class="user-img-radious-style"> <span class="d-sm-none d-lg-inline-block"></span></a>
       <div class="dropdown-menu dropdown-menu-right pullDown">
         <div class="dropdown-title">Hola {{ Auth::user()->name }}</div>
-        @can('profile.index')
-          <a href="{{ route('profile.index') }}" class="dropdown-item has-icon"> <i class="far
-            fa-user"></i> Perfil
-          </a>
-        @endcan
-        <a href="{{ route('logout.index') }}" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>
-          Salir
-        </a>
+        <a href="{{ route('profile.index') }}" class="dropdown-item has-icon"> <i class="far fa-user"></i> Perfil</a>
+        <a href="{{ route('logout.index') }}" class="dropdown-item has-icon text-danger"> <i class="fas fa-sign-out-alt"></i>Salir</a>
       </div>
     </li>
   </ul>
